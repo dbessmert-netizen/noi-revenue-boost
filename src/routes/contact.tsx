@@ -3,11 +3,11 @@ import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { SiteLayout } from "@/components/site/Layout";
 import { submitContact } from "@/server/contact.functions";
-import { headTags } from "@/lib/seo";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
   head: () =>
-    headTags({
+    seo({
       title: "Contact NOI — Talk to a rooftop revenue specialist",
       description:
         "Tell us about your portfolio and we'll show you exactly how much extra NOI your rooftops can generate. Built for US landlords, property developers, and HOAs.",
