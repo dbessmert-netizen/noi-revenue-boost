@@ -83,6 +83,9 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Interactive NOI calculator */}
+      <NoiCalculator />
+
       {/* Reposition strip */}
       <section className="border-y border-border bg-[color:var(--paper-deep)]">
         <div className="mx-auto max-w-6xl px-6 py-20">
