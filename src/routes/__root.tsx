@@ -1,5 +1,4 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-import { orgJsonLd, websiteJsonLd } from "@/lib/seo";
 
 import appCss from "../styles.css?url";
 
@@ -30,15 +29,23 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "NOI — Increase your NOI with solar" },
+      { name: "description", content: "The NOI growth platform for landlords. Turn your rooftop into a recurring income stream — zero upfront." },
+      { name: "author", content: "NOI" },
+      { property: "og:title", content: "NOI — Increase your NOI with solar" },
+      { property: "og:description", content: "The NOI growth platform for landlords. Turn your rooftop into a recurring income stream — zero upfront." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.joinnoi.com" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@joinnoi" },
+      { name: "twitter:title", content: "NOI — Increase your NOI with solar" },
+      { name: "twitter:description", content: "The NOI growth platform for landlords. Turn your rooftop into a recurring income stream — zero upfront." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d9ca27af-8936-4aef-bc20-de5cedd63ed3/id-preview-9b2c42df--624b08fa-0a2a-4b33-b301-3703899aa314.lovable.app-1777580673654.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d9ca27af-8936-4aef-bc20-de5cedd63ed3/id-preview-9b2c42df--624b08fa-0a2a-4b33-b301-3703899aa314.lovable.app-1777580673654.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
-      { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
-    ],
-    scripts: [
-      { type: "application/ld+json", children: JSON.stringify(orgJsonLd) },
-      { type: "application/ld+json", children: JSON.stringify(websiteJsonLd) },
     ],
   }),
   shellComponent: RootShell,
