@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { seo, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 
@@ -87,7 +87,7 @@ function FaqPage() {
         <div className="eyebrow">06 — FAQ</div>
         <h1 className="font-display mt-4 text-5xl tracking-tight">Straight answers to the common ones.</h1>
         <p className="mt-6 text-lg text-[color:var(--ink-soft)]">
-          The questions landlords ask most often, answered without marketing fluff. Don't see yours? <a href="mailto:hello@joinnoi.com" className="underline decoration-[color:var(--solar)]/50 underline-offset-4 hover:text-foreground">Email us</a>.
+          The questions landlords ask most often, answered without marketing fluff. Don't see yours? <Link to="/contact" className="underline decoration-[color:var(--solar)]/50 underline-offset-4 hover:text-foreground">Contact us</Link>.
         </p>
 
         {groups.map((g) => (
