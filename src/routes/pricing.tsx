@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { seo, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -95,8 +95,8 @@ function PricingPage() {
                   </li>
                 ))}
               </ul>
-              <a
-                href="https://my.joinnoi.com"
+              <Link
+                to="/contact"
                 className={`mt-8 inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-medium ${
                   t.accent
                     ? "bg-foreground text-[color:var(--paper)] hover:opacity-90"
@@ -104,7 +104,7 @@ function PricingPage() {
                 }`}
               >
                 {t.cta} →
-              </a>
+              </Link>
             </div>
           ))}
         </div>

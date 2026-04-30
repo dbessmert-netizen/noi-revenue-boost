@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "@tanstack/react-router";
 
 const fmt = (n: number) =>
   n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
@@ -172,12 +173,12 @@ export function NoiCalculator() {
               ))}
             </dl>
 
-            <a
-              href="https://my.joinnoi.com"
+            <Link
+              to="/contact"
               className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-foreground px-5 py-3 text-sm font-medium text-[color:var(--paper)] hover:opacity-90"
             >
               Get my real estimate →
-            </a>
+            </Link>
             <p className="mt-3 text-center text-xs text-[color:var(--ink-mute)]">
               We'll model your specific roof using a recent utility bill.
             </p>

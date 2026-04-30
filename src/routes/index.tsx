@@ -50,12 +50,12 @@ function HomePage() {
               NOI installs rooftop solar on your rental, meters tenant consumption, and bills them on your behalf. You collect a new monthly check — without writing one first.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href="https://my.joinnoi.com"
+              <Link
+                to="/contact"
                 className="inline-flex items-center rounded-full bg-foreground px-5 py-3 text-sm font-medium text-[color:var(--paper)] hover:opacity-90"
               >
                 Get a revenue estimate →
-              </a>
+              </Link>
               <Link
                 to="/economics"
                 className="inline-flex items-center rounded-full border border-border px-5 py-3 text-sm font-medium hover:bg-[color:var(--paper-deep)]"
@@ -187,12 +187,12 @@ function HomePage() {
               Tell us about your property. We'll come back with a free, no-obligation revenue estimate.
             </p>
           </div>
-          <a
-            href="https://my.joinnoi.com"
+          <Link
+            to="/contact"
             className="inline-flex items-center rounded-full bg-foreground px-6 py-3 text-sm font-medium text-[color:var(--paper)] hover:opacity-90"
           >
             Get my estimate →
-          </a>
+          </Link>
         </div>
       </section>
     </SiteLayout>
