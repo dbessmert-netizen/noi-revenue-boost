@@ -68,9 +68,10 @@
   --rule: #D8CFBE;
   --rule-soft: #E5DCC8;
 
-  --solar: #E8541C;
-  --solar-soft: #F8C9B4;
-  --solar-tint: #FBE6D9;
+  /* NOI energy green accent (replaces solar orange) */
+  --solar: #2F7A4F;
+  --solar-soft: #B7D6C2;
+  --solar-tint: #DDEBE0;
 
   --pb-green: #2F6F4E;
   --pb-green-tint: #D6E5DA;

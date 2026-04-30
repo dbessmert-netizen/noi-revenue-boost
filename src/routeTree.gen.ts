@@ -9,50 +9,36 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TenantsRouteImport } from './routes/tenants'
-import { Route as SignupRouteImport } from './routes/signup'
-import { Route as SigninRouteImport } from './routes/signin'
-import { Route as SettingsRouteImport } from './routes/settings'
-import { Route as PropertiesRouteImport } from './routes/properties'
-import { Route as PayoutsRouteImport } from './routes/payouts'
-import { Route as InviteRouteImport } from './routes/invite'
+import { Route as ProcessRouteImport } from './routes/process'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as EconomicsRouteImport } from './routes/economics'
+import { Route as CompareRouteImport } from './routes/compare'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as InvoicesIndexRouteImport } from './routes/invoices.index'
-import { Route as InvoicesIdRouteImport } from './routes/invoices.$id'
 
-const TenantsRoute = TenantsRouteImport.update({
-  id: '/tenants',
-  path: '/tenants',
+const ProcessRoute = ProcessRouteImport.update({
+  id: '/process',
+  path: '/process',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SigninRoute = SigninRouteImport.update({
-  id: '/signin',
-  path: '/signin',
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
+const EconomicsRoute = EconomicsRouteImport.update({
+  id: '/economics',
+  path: '/economics',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PropertiesRoute = PropertiesRouteImport.update({
-  id: '/properties',
-  path: '/properties',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PayoutsRoute = PayoutsRouteImport.update({
-  id: '/payouts',
-  path: '/payouts',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InviteRoute = InviteRouteImport.update({
-  id: '/invite',
-  path: '/invite',
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -60,155 +46,91 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const InvoicesIndexRoute = InvoicesIndexRouteImport.update({
-  id: '/invoices/',
-  path: '/invoices/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InvoicesIdRoute = InvoicesIdRouteImport.update({
-  id: '/invoices/$id',
-  path: '/invoices/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/invite': typeof InviteRoute
-  '/payouts': typeof PayoutsRoute
-  '/properties': typeof PropertiesRoute
-  '/settings': typeof SettingsRoute
-  '/signin': typeof SigninRoute
-  '/signup': typeof SignupRoute
-  '/tenants': typeof TenantsRoute
-  '/invoices/$id': typeof InvoicesIdRoute
-  '/invoices/': typeof InvoicesIndexRoute
+  '/compare': typeof CompareRoute
+  '/economics': typeof EconomicsRoute
+  '/faq': typeof FaqRoute
+  '/pricing': typeof PricingRoute
+  '/process': typeof ProcessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/invite': typeof InviteRoute
-  '/payouts': typeof PayoutsRoute
-  '/properties': typeof PropertiesRoute
-  '/settings': typeof SettingsRoute
-  '/signin': typeof SigninRoute
-  '/signup': typeof SignupRoute
-  '/tenants': typeof TenantsRoute
-  '/invoices/$id': typeof InvoicesIdRoute
-  '/invoices': typeof InvoicesIndexRoute
+  '/compare': typeof CompareRoute
+  '/economics': typeof EconomicsRoute
+  '/faq': typeof FaqRoute
+  '/pricing': typeof PricingRoute
+  '/process': typeof ProcessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/invite': typeof InviteRoute
-  '/payouts': typeof PayoutsRoute
-  '/properties': typeof PropertiesRoute
-  '/settings': typeof SettingsRoute
-  '/signin': typeof SigninRoute
-  '/signup': typeof SignupRoute
-  '/tenants': typeof TenantsRoute
-  '/invoices/$id': typeof InvoicesIdRoute
-  '/invoices/': typeof InvoicesIndexRoute
+  '/compare': typeof CompareRoute
+  '/economics': typeof EconomicsRoute
+  '/faq': typeof FaqRoute
+  '/pricing': typeof PricingRoute
+  '/process': typeof ProcessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/invite'
-    | '/payouts'
-    | '/properties'
-    | '/settings'
-    | '/signin'
-    | '/signup'
-    | '/tenants'
-    | '/invoices/$id'
-    | '/invoices/'
+  fullPaths: '/' | '/compare' | '/economics' | '/faq' | '/pricing' | '/process'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/invite'
-    | '/payouts'
-    | '/properties'
-    | '/settings'
-    | '/signin'
-    | '/signup'
-    | '/tenants'
-    | '/invoices/$id'
-    | '/invoices'
+  to: '/' | '/compare' | '/economics' | '/faq' | '/pricing' | '/process'
   id:
     | '__root__'
     | '/'
-    | '/invite'
-    | '/payouts'
-    | '/properties'
-    | '/settings'
-    | '/signin'
-    | '/signup'
-    | '/tenants'
-    | '/invoices/$id'
-    | '/invoices/'
+    | '/compare'
+    | '/economics'
+    | '/faq'
+    | '/pricing'
+    | '/process'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  InviteRoute: typeof InviteRoute
-  PayoutsRoute: typeof PayoutsRoute
-  PropertiesRoute: typeof PropertiesRoute
-  SettingsRoute: typeof SettingsRoute
-  SigninRoute: typeof SigninRoute
-  SignupRoute: typeof SignupRoute
-  TenantsRoute: typeof TenantsRoute
-  InvoicesIdRoute: typeof InvoicesIdRoute
-  InvoicesIndexRoute: typeof InvoicesIndexRoute
+  CompareRoute: typeof CompareRoute
+  EconomicsRoute: typeof EconomicsRoute
+  FaqRoute: typeof FaqRoute
+  PricingRoute: typeof PricingRoute
+  ProcessRoute: typeof ProcessRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/tenants': {
-      id: '/tenants'
-      path: '/tenants'
-      fullPath: '/tenants'
-      preLoaderRoute: typeof TenantsRouteImport
+    '/process': {
+      id: '/process'
+      path: '/process'
+      fullPath: '/process'
+      preLoaderRoute: typeof ProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/signin': {
-      id: '/signin'
-      path: '/signin'
-      fullPath: '/signin'
-      preLoaderRoute: typeof SigninRouteImport
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
+    '/economics': {
+      id: '/economics'
+      path: '/economics'
+      fullPath: '/economics'
+      preLoaderRoute: typeof EconomicsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/properties': {
-      id: '/properties'
-      path: '/properties'
-      fullPath: '/properties'
-      preLoaderRoute: typeof PropertiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/payouts': {
-      id: '/payouts'
-      path: '/payouts'
-      fullPath: '/payouts'
-      preLoaderRoute: typeof PayoutsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/invite': {
-      id: '/invite'
-      path: '/invite'
-      fullPath: '/invite'
-      preLoaderRoute: typeof InviteRouteImport
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -218,34 +140,16 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/invoices/': {
-      id: '/invoices/'
-      path: '/invoices'
-      fullPath: '/invoices/'
-      preLoaderRoute: typeof InvoicesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/invoices/$id': {
-      id: '/invoices/$id'
-      path: '/invoices/$id'
-      fullPath: '/invoices/$id'
-      preLoaderRoute: typeof InvoicesIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  InviteRoute: InviteRoute,
-  PayoutsRoute: PayoutsRoute,
-  PropertiesRoute: PropertiesRoute,
-  SettingsRoute: SettingsRoute,
-  SigninRoute: SigninRoute,
-  SignupRoute: SignupRoute,
-  TenantsRoute: TenantsRoute,
-  InvoicesIdRoute: InvoicesIdRoute,
-  InvoicesIndexRoute: InvoicesIndexRoute,
+  CompareRoute: CompareRoute,
+  EconomicsRoute: EconomicsRoute,
+  FaqRoute: FaqRoute,
+  PricingRoute: PricingRoute,
+  ProcessRoute: ProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
