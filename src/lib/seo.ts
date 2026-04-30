@@ -86,10 +86,19 @@ export const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "NOI",
+  legalName: "Great Week LLC",
   url: SITE,
   logo: `${SITE}/favicon.png`,
   description:
     "NOI is the revenue platform for US landlords, property developers, and HOAs. We finance rooftop solar, meter tenant consumption, and bill on your behalf — adding a recurring NOI line to your portfolio.",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "2055 Limestone Rd, Ste 200-C",
+    addressLocality: "Wilmington",
+    addressRegion: "DE",
+    postalCode: "19808",
+    addressCountry: "US",
+  },
   areaServed: { "@type": "Country", name: "United States" },
   sameAs: ["https://my.joinnoi.com"],
 };
