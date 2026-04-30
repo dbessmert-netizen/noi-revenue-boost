@@ -12,6 +12,11 @@ export function Footer() {
             <p className="mt-3 max-w-sm text-sm text-[color:var(--ink-soft)]">
               The NOI growth platform for landlords. Own your roof. Own the revenue.
             </p>
+            <address className="mt-6 not-italic text-xs leading-relaxed text-[color:var(--ink-mute)]">
+              <div className="font-medium text-[color:var(--ink-soft)]">Great Week LLC</div>
+              <div>2055 Limestone Rd, Ste 200-C</div>
+              <div>Wilmington, DE 19808</div>
+            </address>
           </div>
           <div>
             <div className="eyebrow">Product</div>
