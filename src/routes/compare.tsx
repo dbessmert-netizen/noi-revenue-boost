@@ -1,14 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
+import { seo, breadcrumbJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/compare")({
-  head: () => ({
-    meta: [
-      { title: "Compare — NOI" },
-      { name: "description", content: "NOI vs. solar installers vs. third-party PPAs vs. rent-roll software. The full-stack revenue platform for landlords." },
-      { property: "og:title", content: "Compare — NOI" },
-    ],
-  }),
+  head: () =>
+    seo({
+      path: "/compare",
+      title: "NOI vs. PPAs vs. Solar Installers vs. Billing Software",
+      description:
+        "How NOI compares to third-party PPAs, solar installers, and rent-roll billing tools. The full-stack solar revenue platform built for US landlords, developers, and HOAs.",
+      keywords: [
+        "PPA vs ownership solar landlord",
+        "solar installer vs platform",
+        "tenant billing software comparison",
+      ],
+      jsonLd: breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Compare", path: "/compare" },
+      ]),
+    }),
   component: ComparePage,
 });
 
