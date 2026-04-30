@@ -1,14 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
+import { seo, breadcrumbJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/process")({
-  head: () => ({
-    meta: [
-      { title: "Process — NOI" },
-      { name: "description", content: "From utility bill to first payout in roughly 60 days. NOI handles assessment, install, tenant onboarding, and monthly payouts." },
-      { property: "og:title", content: "Process — NOI" },
-    ],
-  }),
+  head: () =>
+    seo({
+      path: "/process",
+      title: "How NOI Works — From Utility Bill to Monthly Payout in 60 Days",
+      description:
+        "Four steps: assess, install, enroll tenants, collect monthly payouts. NOI handles permitting, install, billing, and Stripe payouts for landlords, developers, and HOAs across the US.",
+      keywords: [
+        "how solar billing works landlord",
+        "tenant solar onboarding",
+        "Stripe Connect solar payouts",
+        "solar permitting interconnect timeline",
+      ],
+      jsonLd: breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Process", path: "/process" },
+      ]),
+    }),
   component: ProcessPage,
 });
 

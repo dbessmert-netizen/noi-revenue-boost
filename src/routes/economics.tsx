@@ -1,15 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
+import { seo, breadcrumbJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/economics")({
-  head: () => ({
-    meta: [
-      { title: "Economics — NOI" },
-      { name: "description", content: "How NOI moves revenue per unit. Real numbers from real properties — modeled, billed, and paid out monthly." },
-      { property: "og:title", content: "Economics — NOI" },
-      { property: "og:description", content: "Revenue per unit, not panels per roof. See the math." },
-    ],
-  }),
+  head: () =>
+    seo({
+      path: "/economics",
+      title: "Solar Economics for Landlords & Developers — NOI",
+      description:
+        "See how NOI lifts revenue per unit across US multifamily, single-family rentals, BTR, and HOA portfolios. Real numbers from 12-unit and 24-unit properties.",
+      keywords: [
+        "multifamily NOI calculator",
+        "rental property cash flow solar",
+        "cap rate uplift solar",
+        "submetered solar economics",
+      ],
+      jsonLd: breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Economics", path: "/economics" },
+      ]),
+    }),
   component: EconomicsPage,
 });
 

@@ -1,18 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { NoiCalculator } from "@/components/site/NoiCalculator";
+import { seo, productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import heroRooftop from "@/assets/hero-rooftop.jpg";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "NOI — Your roof is a revenue line" },
-      { name: "description", content: "NOI turns your rooftop into recurring revenue. We finance, install, meter, and bill tenants — you collect monthly payouts. Zero capex." },
-      { property: "og:title", content: "NOI — Your roof is a revenue line" },
-      { property: "og:description", content: "Own your roof. Own the revenue. The NOI growth platform for landlords." },
-      { property: "og:url", content: "https://www.joinnoi.com" },
-    ],
-  }),
+  head: () =>
+    seo({
+      path: "/",
+      title: "NOI — Rooftop Solar Revenue for US Landlords, Developers & HOAs",
+      description:
+        "Turn your rental rooftop into recurring revenue. NOI finances solar, meters tenants, and bills on your behalf — built for US landlords, property developers, BTR operators, and HOAs. Zero capex.",
+      keywords: [
+        "increase NOI rental property",
+        "passive income for landlords",
+        "multifamily solar revenue",
+        "BTR solar program",
+        "HOA solar income",
+        "property developer ROI solar",
+      ],
+      jsonLd: [productJsonLd, breadcrumbJsonLd([{ name: "Home", path: "/" }])],
+    }),
   component: HomePage,
 });
 

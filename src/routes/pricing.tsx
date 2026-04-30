@@ -1,14 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
+import { seo, breadcrumbJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/pricing")({
-  head: () => ({
-    meta: [
-      { title: "Pricing — NOI" },
-      { name: "description", content: "Performance-aligned pricing. No setup fees, no lock-in. Platform fee scales inversely with portfolio size." },
-      { property: "og:title", content: "Pricing — NOI" },
-    ],
-  }),
+  head: () =>
+    seo({
+      path: "/pricing",
+      title: "Pricing — Performance-Aligned Solar Revenue Platform | NOI",
+      description:
+        "Transparent pricing for US landlords, property developers, REITs, and HOAs. No setup fees. No lock-in. Platform fee scales inversely with portfolio size — Starter, Growth, and Portfolio tiers.",
+      keywords: [
+        "solar revenue platform pricing",
+        "tenant billing pricing landlord",
+        "REIT solar SaaS pricing",
+        "HOA solar platform cost",
+      ],
+      jsonLd: breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Pricing", path: "/pricing" },
+      ]),
+    }),
   component: PricingPage,
 });
 
