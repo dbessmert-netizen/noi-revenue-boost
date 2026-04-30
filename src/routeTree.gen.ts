@@ -10,9 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TenantsRouteImport } from './routes/tenants'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SigninRouteImport } from './routes/signin'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as PropertiesRouteImport } from './routes/properties'
 import { Route as PayoutsRouteImport } from './routes/payouts'
+import { Route as InviteRouteImport } from './routes/invite'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as InvoicesIndexRouteImport } from './routes/invoices.index'
 import { Route as InvoicesIdRouteImport } from './routes/invoices.$id'
@@ -20,6 +23,16 @@ import { Route as InvoicesIdRouteImport } from './routes/invoices.$id'
 const TenantsRoute = TenantsRouteImport.update({
   id: '/tenants',
   path: '/tenants',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsRoute = SettingsRouteImport.update({
@@ -35,6 +48,11 @@ const PropertiesRoute = PropertiesRouteImport.update({
 const PayoutsRoute = PayoutsRouteImport.update({
   id: '/payouts',
   path: '/payouts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InviteRoute = InviteRouteImport.update({
+  id: '/invite',
+  path: '/invite',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -55,18 +73,24 @@ const InvoicesIdRoute = InvoicesIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/invite': typeof InviteRoute
   '/payouts': typeof PayoutsRoute
   '/properties': typeof PropertiesRoute
   '/settings': typeof SettingsRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
   '/tenants': typeof TenantsRoute
   '/invoices/$id': typeof InvoicesIdRoute
   '/invoices/': typeof InvoicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/invite': typeof InviteRoute
   '/payouts': typeof PayoutsRoute
   '/properties': typeof PropertiesRoute
   '/settings': typeof SettingsRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
   '/tenants': typeof TenantsRoute
   '/invoices/$id': typeof InvoicesIdRoute
   '/invoices': typeof InvoicesIndexRoute
@@ -74,9 +98,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/invite': typeof InviteRoute
   '/payouts': typeof PayoutsRoute
   '/properties': typeof PropertiesRoute
   '/settings': typeof SettingsRoute
+  '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
   '/tenants': typeof TenantsRoute
   '/invoices/$id': typeof InvoicesIdRoute
   '/invoices/': typeof InvoicesIndexRoute
@@ -85,27 +112,36 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/invite'
     | '/payouts'
     | '/properties'
     | '/settings'
+    | '/signin'
+    | '/signup'
     | '/tenants'
     | '/invoices/$id'
     | '/invoices/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/invite'
     | '/payouts'
     | '/properties'
     | '/settings'
+    | '/signin'
+    | '/signup'
     | '/tenants'
     | '/invoices/$id'
     | '/invoices'
   id:
     | '__root__'
     | '/'
+    | '/invite'
     | '/payouts'
     | '/properties'
     | '/settings'
+    | '/signin'
+    | '/signup'
     | '/tenants'
     | '/invoices/$id'
     | '/invoices/'
@@ -113,9 +149,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InviteRoute: typeof InviteRoute
   PayoutsRoute: typeof PayoutsRoute
   PropertiesRoute: typeof PropertiesRoute
   SettingsRoute: typeof SettingsRoute
+  SigninRoute: typeof SigninRoute
+  SignupRoute: typeof SignupRoute
   TenantsRoute: typeof TenantsRoute
   InvoicesIdRoute: typeof InvoicesIdRoute
   InvoicesIndexRoute: typeof InvoicesIndexRoute
@@ -128,6 +167,20 @@ declare module '@tanstack/react-router' {
       path: '/tenants'
       fullPath: '/tenants'
       preLoaderRoute: typeof TenantsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings': {
@@ -149,6 +202,13 @@ declare module '@tanstack/react-router' {
       path: '/payouts'
       fullPath: '/payouts'
       preLoaderRoute: typeof PayoutsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invite': {
+      id: '/invite'
+      path: '/invite'
+      fullPath: '/invite'
+      preLoaderRoute: typeof InviteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -177,9 +237,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InviteRoute: InviteRoute,
   PayoutsRoute: PayoutsRoute,
   PropertiesRoute: PropertiesRoute,
   SettingsRoute: SettingsRoute,
+  SigninRoute: SigninRoute,
+  SignupRoute: SignupRoute,
   TenantsRoute: TenantsRoute,
   InvoicesIdRoute: InvoicesIdRoute,
   InvoicesIndexRoute: InvoicesIndexRoute,
