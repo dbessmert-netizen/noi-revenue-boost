@@ -1,14 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
+import { seo, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/faq")({
-  head: () => ({
-    meta: [
-      { title: "FAQ — NOI" },
-      { name: "description", content: "Straight answers to the common questions landlords ask about NOI." },
-      { property: "og:title", content: "FAQ — NOI" },
-    ],
-  }),
+  head: () =>
+    seo({
+      path: "/faq",
+      title: "FAQ — Solar Revenue for Landlords, Developers & HOAs | NOI",
+      description:
+        "Common questions from US landlords, property developers, and HOAs about NOI: legality, financing, tenant payments, regulation, and timelines.",
+      keywords: [
+        "is tenant solar billing legal",
+        "VNEM virtual net metering states",
+        "PPA financing landlord questions",
+        "RUBS solar allocation",
+      ],
+      jsonLd: [
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "FAQ", path: "/faq" },
+        ]),
+        faqJsonLd(groups.flatMap((g) => g.faqs)),
+      ],
+    }),
   component: FaqPage,
 });
 
