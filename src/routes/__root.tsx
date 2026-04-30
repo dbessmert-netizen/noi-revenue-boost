@@ -1,4 +1,5 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { orgJsonLd, websiteJsonLd } from "@/lib/seo";
 
 import appCss from "../styles.css?url";
 
@@ -29,18 +30,15 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "NOI — Landlord SaaS" },
-      { name: "description", content: "NOI bills rent and metered solar in one invoice and pays you out via Stripe." },
-      { name: "author", content: "NOI" },
-      { property: "og:title", content: "NOI — Landlord SaaS" },
-      { property: "og:description", content: "Bill rent and metered solar in one invoice. Get paid by the kilowatt." },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://www.joinnoi.com" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(orgJsonLd) },
+      { type: "application/ld+json", children: JSON.stringify(websiteJsonLd) },
     ],
   }),
   shellComponent: RootShell,
