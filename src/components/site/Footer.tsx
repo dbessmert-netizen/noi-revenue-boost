@@ -31,8 +31,7 @@ export function Footer() {
             <div className="eyebrow">Company</div>
             <ul className="mt-4 space-y-2 text-sm">
               <li><Link to="/faq" className="hover:text-foreground text-[color:var(--ink-soft)]">FAQ</Link></li>
-              <li><a href="https://my.joinnoi.com" className="hover:text-foreground text-[color:var(--ink-soft)]">Sign in</a></li>
-              <li><a href="mailto:hello@joinnoi.com" className="hover:text-foreground text-[color:var(--ink-soft)]">Contact</a></li>
+              <li><Link to="/contact" className="hover:text-foreground text-[color:var(--ink-soft)]">Contact us</Link></li>
             </ul>
           </div>
         </div>

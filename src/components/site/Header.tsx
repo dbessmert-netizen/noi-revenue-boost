@@ -28,18 +28,12 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <a
-            href="https://my.joinnoi.com"
-            className="hidden text-sm text-[color:var(--ink-soft)] hover:text-foreground sm:inline"
-          >
-            Sign in
-          </a>
-          <a
-            href="https://my.joinnoi.com"
+          <Link
+            to="/contact"
             className="inline-flex items-center rounded-full bg-foreground px-4 py-2 text-sm font-medium text-[color:var(--paper)] transition hover:opacity-90"
           >
-            Get started
-          </a>
+            Contact us
+          </Link>
         </div>
       </div>
     </header>
