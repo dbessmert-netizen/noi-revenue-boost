@@ -13,6 +13,7 @@ import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EconomicsRouteImport } from './routes/economics'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -36,6 +37,11 @@ const EconomicsRoute = EconomicsRouteImport.update({
   path: '/economics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CompareRoute = CompareRouteImport.update({
   id: '/compare',
   path: '/compare',
@@ -50,6 +56,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
+  '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/pricing': typeof PricingRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
+  '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/pricing': typeof PricingRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
+  '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/pricing': typeof PricingRoute
@@ -74,13 +83,28 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/compare' | '/economics' | '/faq' | '/pricing' | '/process'
+  fullPaths:
+    | '/'
+    | '/compare'
+    | '/contact'
+    | '/economics'
+    | '/faq'
+    | '/pricing'
+    | '/process'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/compare' | '/economics' | '/faq' | '/pricing' | '/process'
+  to:
+    | '/'
+    | '/compare'
+    | '/contact'
+    | '/economics'
+    | '/faq'
+    | '/pricing'
+    | '/process'
   id:
     | '__root__'
     | '/'
     | '/compare'
+    | '/contact'
     | '/economics'
     | '/faq'
     | '/pricing'
@@ -90,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompareRoute: typeof CompareRoute
+  ContactRoute: typeof ContactRoute
   EconomicsRoute: typeof EconomicsRoute
   FaqRoute: typeof FaqRoute
   PricingRoute: typeof PricingRoute
@@ -126,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EconomicsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/compare': {
       id: '/compare'
       path: '/compare'
@@ -146,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompareRoute: CompareRoute,
+  ContactRoute: ContactRoute,
   EconomicsRoute: EconomicsRoute,
   FaqRoute: FaqRoute,
   PricingRoute: PricingRoute,
@@ -154,12 +187,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
