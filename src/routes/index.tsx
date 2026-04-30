@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
+import { NoiCalculator } from "@/components/site/NoiCalculator";
 import heroRooftop from "@/assets/hero-rooftop.jpg";
 
 export const Route = createFileRoute("/")({
@@ -81,6 +82,9 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Interactive NOI calculator */}
+      <NoiCalculator />
 
       {/* Reposition strip */}
       <section className="border-y border-border bg-[color:var(--paper-deep)]">
