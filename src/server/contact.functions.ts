@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
 import { sendLovableEmail } from "@lovable.dev/email-js";
 import { z } from "zod";
+import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -18,12 +18,6 @@ const NOTIFY_TO = "dbessmert@gmail.com";
 export const submitContact = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => contactSchema.parse(data))
   .handler(async ({ data }) => {
-    const supabaseUrl = process.env.VITE_SUPABASE_URL!;
-    const supabaseKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY!;
-    const supabase = createClient(supabaseUrl, supabaseKey, {
-      auth: { autoRefreshToken: false, persistSession: false },
-    });
-
     const insert = {
       name: data.name,
       email: data.email,
@@ -34,7 +28,7 @@ export const submitContact = createServerFn({ method: "POST" })
       source: data.source || null,
     };
 
-    const { error } = await supabase.from("contact_submissions").insert(insert);
+    const { error } = await supabaseAdmin.from("contact_submissions").insert(insert);
     if (error) {
       console.error("contact_submissions insert failed", error);
       return { success: false, error: "Could not save your message. Please try again." };
