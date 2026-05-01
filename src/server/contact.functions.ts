@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
 import { sendLovableEmail } from "@lovable.dev/email-js";
 import { z } from "zod";
+import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
