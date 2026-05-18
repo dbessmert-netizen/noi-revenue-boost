@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOI × Center Creek Capital — Kipling Meadows Solar Offer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#E8E3DA;min-height:100vh;padding:2rem 1rem;color:#1A1714}
+:root{
+  --paper:#F4EFE6;--card:#EFEBE3;--rule:#DDD8CF;--ink:#1A1714;--ink-soft:#6B6560;
+  --ink-mute:#9E9890;--solar:#E8541C;--solar-light:#FBE9E1;--solar-dark:#C4440F;--white:#FFFFFF;
+}
+.noi{font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);border-radius:20px;overflow:hidden;max-width:780px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,0.12)}
+.cover{background:var(--ink);padding:3rem 2.5rem 2.5rem;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:rgba(232,84,28,0.12)}
+.cover::after{content:'';position:absolute;bottom:-40px;left:40px;width:140px;height:140px;border-radius:50%;background:rgba(232,84,28,0.07)}
+.cover-top{display:flex;align-items:center;gap:10px;margin-bottom:2rem}
+.noi-icon{width:36px;height:36px;border-radius:8px;background:var(--solar);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.noi-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.noi-wordmark{font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:#fff;letter-spacing:-.3px}
+.noi-wordmark span{color:var(--solar)}
+.cover-eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#9E9890;margin-bottom:1rem}
+.cover-headline{font-family:'Fraunces',serif;font-size:40px;font-weight:300;color:#fff;line-height:1.15;margin-bottom:.5rem}
+.cover-headline em{color:var(--solar);font-style:italic}
+.cover-sub{font-size:13px;color:#9E9890;margin-bottom:2rem;line-height:1.5}
+.cover-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem}
+.pill{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);color:#D4CFCA}
+.cover-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.08);border-radius:10px;overflow:hidden}
+.ckpi{background:rgba(255,255,255,0.05);padding:1.1rem .75rem;text-align:center}
+.ckpi-val{font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:#fff;line-height:1;margin-bottom:4px}
+.ckpi-val.orange{color:var(--solar)}
+.ckpi-label{font-size:10px;color:#9E9890;text-transform:uppercase;letter-spacing:.5px;line-height:1.4}
+.toc{background:var(--card);border-bottom:1px solid var(--rule);padding:.85rem 1.5rem;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.toc-label{font-size:11px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:1px;margin-right:4px}
+.toc-btn{font-size:12px;color:var(--ink-soft);background:transparent;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Inter',sans-serif;text-decoration:none;display:inline-block}
+.toc-btn:hover{background:var(--paper);color:var(--ink)}
+.expand-btn{margin-left:auto;font-size:12px;color:var(--solar);background:transparent;border:1px solid var(--solar);border-radius:6px;padding:4px 10px;cursor:pointer;font-family:'Inter',sans-serif}
+.expand-btn:hover{background:var(--solar-light)}
+.sections{}
+.sec{border-bottom:1px solid var(--rule)}
+.sec-hdr{display:flex;align-items:center;gap:12px;padding:1.1rem 1.5rem;cursor:pointer;background:var(--paper);transition:background .15s;user-select:none}
+.sec-hdr:hover{background:var(--card)}
+.sec-num{font-family:'Fraunces',serif;font-size:13px;font-weight:300;color:var(--ink-mute);width:18px;flex-shrink:0}
+.sec-title{font-family:'Fraunces',serif;font-size:18px;font-weight:300;color:var(--ink);flex:1}
+.sec-chevron{font-size:18px;color:var(--ink-mute);transition:transform .2s;line-height:1}
+.sec-chevron.open{transform:rotate(180deg)}
+.sec-body{background:var(--white);padding:1.5rem 1.75rem;display:none}
+.sec-body.open{display:block}
+.callout{border-left:3px solid var(--solar);background:var(--solar-light);border-radius:0 8px 8px 0;padding:.9rem 1rem;margin-bottom:1rem}
+.callout-title{font-family:'Fraunces',serif;font-size:15px;color:var(--solar-dark);margin-bottom:4px}
+.callout-body{font-size:13px;color:#6B4033;line-height:1.6}
+.callout.neutral{border-color:var(--rule);background:var(--card)}
+.callout.neutral .callout-title{color:var(--ink);font-family:'Fraunces',serif}
+.callout.neutral .callout-body{color:var(--ink-soft)}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
+.stat{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:.9rem .75rem;text-align:center}
+.stat-val{font-family:'Fraunces',serif;font-size:26px;font-weight:300;color:var(--ink);line-height:1;margin-bottom:4px}
+.stat-val.orange{color:var(--solar)}
+.stat-label{font-size:11px;color:var(--ink-mute);line-height:1.4}
+.stat-sub{font-size:10px;color:var(--ink-mute);margin-top:2px;opacity:.7}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:1rem}
+.tbl th{background:var(--ink);color:#F4EFE6;padding:9px 12px;text-align:left;font-weight:500;font-size:11px;letter-spacing:.3px}
+.tbl th:not(:first-child){text-align:center}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--ink)}
+.tbl td:not(:first-child){text-align:center}
+.tbl tr:nth-child(even) td{background:var(--paper)}
+.tbl .tot td{background:var(--solar-light);font-weight:500;color:var(--solar-dark)}
+.tbl .orange{color:var(--solar);font-weight:500}
+.tbl .muted{color:var(--ink-mute)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.icard{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:.9rem 1rem}
+.icard.dark{background:var(--ink)}
+.icard-title{font-family:'Fraunces',serif;font-size:16px;font-weight:300;margin-bottom:.5rem;color:var(--ink)}
+.icard.dark .icard-title{color:var(--solar)}
+.icard-body{font-size:12px;color:var(--ink-soft);line-height:1.6}
+.icard.dark .icard-body{color:#9E9890}
+.icard-big{font-family:'Fraunces',serif;font-size:30px;font-weight:300;color:var(--solar);line-height:1;margin-bottom:4px}
+.chk{list-style:none;font-size:12px;color:var(--ink-soft)}
+.chk li{padding:3px 0;display:flex;gap:6px}
+.chk li::before{content:"–";color:var(--solar);flex-shrink:0}
+.tl{padding-left:24px;position:relative}
+.tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:1px;background:var(--rule)}
+.tl-item{position:relative;margin-bottom:16px}
+.tl-dot{position:absolute;left:-20px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--solar)}
+.tl-phase{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--solar);margin-bottom:1px}
+.tl-label{font-family:'Fraunces',serif;font-size:16px;font-weight:300;color:var(--ink);margin-bottom:2px}
+.tl-desc{font-size:12px;color:var(--ink-soft);line-height:1.5}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:0;margin-bottom:1.5rem}
+.kv-row{display:contents}
+.kv-row .k{font-size:12px;color:var(--ink-mute);padding:9px 16px 9px 0;border-bottom:1px solid var(--rule)}
+.kv-row .v{font-size:12px;color:var(--ink);padding:9px 0;border-bottom:1px solid var(--rule);font-weight:500}
+.kv-row .v.orange{color:var(--solar)}
+.kv-row .v.red{color:#C62828}
+.sig{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin-top:1rem}
+.sig-side{padding:1.5rem 1.25rem}
+.sig-side.left{background:var(--solar-light);border-right:1px solid var(--rule)}
+.sig-side.right{background:var(--paper)}
+.sig-party{font-family:'Fraunces',serif;font-size:15px;font-weight:300;margin-bottom:1.1rem;color:var(--ink)}
+.sig-line{border-bottom:1px solid var(--ink-mute);margin-bottom:4px;height:32px}
+.sig-lbl{font-size:10px;color:var(--ink-mute);margin-bottom:.9rem;letter-spacing:.3px}
+.sig-entity{font-family:'Fraunces',serif;font-size:13px;color:var(--solar-dark);margin-top:.5rem}
+.sig-url{font-size:11px;color:var(--ink-mute)}
+.validity{text-align:center;font-size:12px;color:var(--ink-mute);margin-top:1rem;padding:.85rem;background:var(--card);border-radius:8px;border:1px solid var(--rule)}
+.validity strong{color:var(--solar-dark)}
+.body-txt{font-size:13px;color:var(--ink-soft);line-height:1.6;margin-bottom:.85rem}
+@media(max-width:600px){
+  .stat-row{grid-template-columns:1fr 1fr}
+  .two{grid-template-columns:1fr}
+  .cover-kpis{grid-template-columns:1fr}
+  .sig{grid-template-columns:1fr}
+  .sig-side.left{border-right:none;border-bottom:1px solid var(--rule)}
+  .tbl{font-size:12px}
+  .cover-headline{font-size:30px}
+}
+</style>
+</head>
+<body>
+
+<div id="gate" style="position:fixed;inset:0;z-index:9999;background:#F4EFE6;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif">
+  <div style="text-align:center;padding:2.5rem;max-width:360px;width:100%">
+    <div style="width:48px;height:48px;border-radius:10px;background:#E8541C;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+    </div>
+    <div style="font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:#1A1714;margin-bottom:.35rem">NOI.</div>
+    <div style="font-size:13px;color:#9E9890;margin-bottom:.25rem">Kipling Meadows Solar Program</div>
+    <div style="font-size:12px;color:#9E9890;margin-bottom:2rem">Center Creek Capital &middot; Confidential</div>
+    <div style="margin-bottom:.75rem;text-align:left">
+      <label style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#9E9890;display:block;margin-bottom:6px">Access password</label>
+      <input id="pw" type="password" placeholder="Enter password" onkeydown="if(event.key==='Enter')check()"
+        style="width:100%;padding:10px 14px;border:1px solid #DDD8CF;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;background:#fff;color:#1A1714;outline:none;box-sizing:border-box">
+    </div>
+    <div id="pw-err" style="font-size:12px;color:#C4440F;margin-bottom:.75rem;min-height:18px"></div>
+    <button onclick="check()" style="width:100%;padding:11px;background:#E8541C;color:#fff;border:none;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;cursor:pointer;font-weight:500">View proposal</button>
+    <div style="margin-top:1.25rem;font-size:11px;color:#9E9890">joinnoi.com</div>
+  </div>
+</div>
+<script>
+function check(){
+  var v=document.getElementById('pw').value.trim().toLowerCase();
+  if(v==='sunrise'){
+    document.getElementById('gate').style.display='none';
+    document.body.style.overflow='';
+  } else {
+    document.getElementById('pw-err').textContent='Incorrect password. Please try again.';
+    document.getElementById('pw').value='';
+    document.getElementById('pw').focus();
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.body.style.overflow='hidden';
+  setTimeout(function(){document.getElementById('pw').focus()},100);
+});
+</script>
+
+<div class="noi">
+
+<div class="cover">
+  <div class="cover-top">
+    <div class="noi-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+    </div>
+    <div class="noi-wordmark">NOI<span>.</span></div>
+  </div>
+  <div class="cover-eyebrow">Commercial Partnership Offer &middot; Confidential &middot; May 2026</div>
+  <div class="cover-headline">Kipling Meadows<br><em>Solar Program</em></div>
+  <div class="cover-sub">Prepared for Center Creek Capital &middot; Foley, Alabama &middot; 118 single-family homes</div>
+  <div class="cover-pills">
+    <div class="pill">joinnoi.com</div>
+    <div class="pill">centercreekcapital.com</div>
+    <div class="pill">Baldwin County, AL</div>
+    <div class="pill">us.ecoflow.com</div>
+  </div>
+  <div class="cover-kpis">
+    <div class="ckpi"><div class="ckpi-val orange">$40,625+</div><div class="ckpi-label">Year 1 NOI uplift</div></div>
+    <div class="ckpi"><div class="ckpi-val">$0</div><div class="ckpi-label">Capital required</div></div>
+    <div class="ckpi"><div class="ckpi-val orange">$108K+</div><div class="ckpi-label">All phases / year</div></div>
+  </div>
+</div>
+
+<div class="toc">
+  <span class="toc-label">Jump to</span>
+  <button class="toc-btn" onclick="openSec('s1')">Summary</button>
+  <button class="toc-btn" onclick="openSec('sroi')" style="color:var(--solar);font-weight:500">★ ROI</button>
+  <button class="toc-btn" onclick="openSec('s2')">About NOI</button>
+  <button class="toc-btn" onclick="openSec('s3')">Community</button>
+  <button class="toc-btn" onclick="openSec('s4')">Solar data</button>
+  <button class="toc-btn" onclick="openSec('s5')">Financials</button>
+  <button class="toc-btn" onclick="openSec('s6')">Battery</button>
+  <button class="toc-btn" onclick="openSec('s7')">EV</button>
+  <button class="toc-btn" onclick="openSec('s8')">Projections</button>
+  <button class="toc-btn" onclick="openSec('s9')">Timeline</button>
+  <button class="toc-btn" onclick="openSec('s10')">Sign</button>
+  <button class="expand-btn" onclick="toggleAll()">Expand all</button>
+</div>
+
+<div class="sections">
+
+<div class="sec" id="s1">
+  <div class="sec-hdr" onclick="toggle('s1')">
+    <span class="sec-num">01</span>
+    <span class="sec-title">Executive Summary</span>
+    <span class="sec-chevron open">&#8964;</span>
+  </div>
+  <div class="sec-body open">
+    <div class="callout">
+      <div class="callout-title">The opportunity in one line</div>
+      <div class="callout-body">Center Creek Capital earns <strong>$40,625+ per year</strong> in new NOI with zero dollars invested &mdash; by charging tenants 20% less than their current Riviera Utilities bill. NOI handles everything: financing, installation, tenant billing, and ongoing operations.</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-val">875 kW</div><div class="stat-label">Total solar capacity</div><div class="stat-sub">Across 118 rooftops</div></div>
+      <div class="stat"><div class="stat-val">1.1M</div><div class="stat-label">kWh produced / year</div><div class="stat-sub">5.1 peak sun hrs/day</div></div>
+      <div class="stat"><div class="stat-val">430 MT</div><div class="stat-label">CO&sup2; offset / year</div><div class="stat-sub">&asymp; 17,200 trees</div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-val orange">$109</div><div class="stat-label">NOI lease cost / home</div><div class="stat-sub">13.70&cent;/kWh effective</div></div>
+      <div class="stat"><div class="stat-val">$174</div><div class="stat-label">Riviera Utilities avg bill</div><div class="stat-sub">14.5&cent;/kWh &middot; 1,750 sq ft home</div></div>
+      <div class="stat"><div class="stat-val orange">$139</div><div class="stat-label">CC charges tenant</div><div class="stat-sub">20% below utility &mdash; easy sell</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="sroi">
+  <div class="sec-hdr" onclick="toggle('sroi')" style="background:var(--solar-light)">
+    <span class="sec-num" style="color:var(--solar)">★</span>
+    <span class="sec-title" style="color:var(--solar-dark)">ROI Spotlight — Before &amp; After NOI</span>
+    <span class="sec-chevron open" style="color:var(--solar)">&#8964;</span>
+  </div>
+  <div class="sec-body open" style="background:#FFF9F6">
+    <p class="body-txt">Here is the exact picture for a typical Kipling Meadows home — before and after the NOI solar program. The math is simple, the upside is real.</p>
+    <div class="two" style="margin-bottom:1rem">
+      <div style="background:#F9F5F0;border:1px solid var(--rule);border-radius:12px;padding:1.1rem">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-mute);margin-bottom:.6rem">🔴 Before NOI</div>
+        <div style="font-family:'Fraunces',serif;font-size:15px;color:var(--ink);margin-bottom:.75rem">Status quo — utility grid only</div>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:0;font-size:12px">
+          <div style="padding:6px 14px 6px 0;color:var(--ink-mute);border-bottom:1px solid var(--rule)">Utility provider</div><div style="padding:6px 0;font-weight:500;color:var(--ink);border-bottom:1px solid var(--rule)">Riviera Utilities (Foley)</div>
+          <div style="padding:6px 14px 6px 0;color:var(--ink-mute);border-bottom:1px solid var(--rule)">Blended rate</div><div style="padding:6px 0;font-weight:500;color:var(--ink);border-bottom:1px solid var(--rule)">14.5&cent;/kWh</div>
+          <div style="padding:6px 14px 6px 0;color:var(--ink-mute);border-bottom:1px solid var(--rule)">Avg home (1,750 sq ft)</div><div style="padding:6px 0;font-weight:500;color:var(--ink);border-bottom:1px solid var(--rule)">~1,100 kWh/month</div>
+          <div style="padding:6px 14px 6px 0;color:var(--ink-mute);border-bottom:1px solid var(--rule)">Avg monthly bill</div><div style="padding:6px 0;font-weight:500;color:#C62828;border-bottom:1px solid var(--rule)">$174/month</div>
+          <div style="padding:6px 14px 6px 0;color:var(--ink-mute)">Landlord energy revenue</div><div style="padding:6px 0;font-weight:600;color:var(--ink-mute)">$0</div>
+        </div>
+      </div>
+      <div style="background:var(--solar-light);border:2px solid var(--solar);border-radius:12px;padding:1.1rem">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--solar);margin-bottom:.6rem">🟢 After NOI</div>
+        <div style="font-family:'Fraunces',serif;font-size:15px;color:var(--ink);margin-bottom:.75rem">Solar on every rooftop</div>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:0;font-size:12px">
+          <div style="padding:6px 14px 6px 0;color:var(--ink-mute);border-bottom:1px solid var(--rule)">System size</div><div style="padding:6px 0;font-weight:500;color:var(--ink);border-bottom:1px solid var(--rule)">7.5 kW/home &middot; 9,548 kWh/yr</div>
+          <div style="padding:6px 14px 6px 0;color:var(--ink-mute);border-bottom:1px solid var(--rule)">NOI gross cost/watt</div><div style="padding:6px 0;font-weight:500;color:var(--ink);border-bottom:1px solid var(--rule)">$2.75/W &rarr; $1.65/W net (40% ITC)</div>
+          <div style="padding:6px 14px 6px 0;color:var(--ink-mute);border-bottom:1px solid var(--rule)">Landlord lease payment</div><div style="padding:6px 0;font-weight:500;color:var(--ink);border-bottom:1px solid var(--rule)">$109/month (13.70&cent;/kWh)</div>
+          <div style="padding:6px 14px 6px 0;color:var(--ink-mute);border-bottom:1px solid var(--rule)">Tenant charged (−20%)</div><div style="padding:6px 0;font-weight:500;color:var(--solar-dark);border-bottom:1px solid var(--rule)">$139.20/month &mdash; they save $34.80</div>
+          <div style="padding:6px 14px 6px 0;color:var(--ink-mute)">Net to landlord / home</div><div style="padding:6px 0;font-weight:700;color:var(--solar-dark)">$28.69/month</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--ink);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem">
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#9E9890;margin-bottom:.85rem">Per-tenant math — 20% bill reduction model</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center">
+        <div>
+          <div style="font-size:10px;color:#9E9890;margin-bottom:4px">Riviera bill today</div>
+          <div style="font-family:'Fraunces',serif;font-size:24px;color:#fff;line-height:1">$174</div>
+          <div style="font-size:10px;color:#9E9890;margin-top:3px">tenant pays utility</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:#9E9890;margin-bottom:4px">NOI charge to tenant</div>
+          <div style="font-family:'Fraunces',serif;font-size:24px;color:var(--solar);line-height:1">$139</div>
+          <div style="font-size:10px;color:#9E9890;margin-top:3px">−20% &middot; easy yes</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:#9E9890;margin-bottom:4px">Landlord pays NOI</div>
+          <div style="font-family:'Fraunces',serif;font-size:24px;color:#fff;line-height:1">$109</div>
+          <div style="font-size:10px;color:#9E9890;margin-top:3px">13.70&cent;/kWh effective</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:#9E9890;margin-bottom:4px">Net / home / month</div>
+          <div style="font-family:'Fraunces',serif;font-size:24px;color:var(--solar);line-height:1">$28.69</div>
+          <div style="font-size:10px;color:#9E9890;margin-top:3px">after 5% NOI fee</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--solar);border-radius:10px;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
+      <div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Community annual NOI uplift &mdash; 118 homes</div>
+        <div style="font-family:'Fraunces',serif;font-size:34px;font-weight:300;color:#fff;line-height:1">$40,625 / year</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:11px;color:rgba(255,255,255,0.7);margin-bottom:4px">Property value add @ 6% cap rate</div>
+        <div style="font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:#fff;line-height:1">+$677,083</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="s2">
+  <div class="sec-hdr" onclick="toggle('s2')">
+    <span class="sec-num">02</span>
+    <span class="sec-title">About NOI</span>
+    <span class="sec-chevron">&#8964;</span>
+  </div>
+  <div class="sec-body">
+    <p class="body-txt">NOI is a solar income platform built for residential real estate operators &mdash; turning rooftops into recurring revenue streams across SFR and BTR communities, with zero operational burden on the landlord.</p>
+    <div class="two">
+      <div class="icard"><div class="icard-title">Capital-lease financing</div><div class="icard-body">NOI sources and structures the lease at 8.99% through institutional partners. No debt on Center Creek&rsquo;s balance sheet.</div></div>
+      <div class="icard"><div class="icard-title">Full installation</div><div class="icard-body">Licensed, bonded crews handle design, permitting, installation, commissioning, and all HOA coordination.</div></div>
+      <div class="icard"><div class="icard-title">Tenant billing</div><div class="icard-body">Residents pay a flat solar fee below their utility bill. NOI invoices, collects, and remits revenue monthly.</div></div>
+      <div class="icard"><div class="icard-title">Ongoing operations</div><div class="icard-body">24/7 production monitoring, maintenance dispatch, warranty management, and annual performance reporting.</div></div>
+    </div>
+    <div class="callout neutral">
+      <div class="callout-title">NOI also offers rent collection</div>
+      <div class="callout-body">Consolidate rent, solar, battery, and EV billing on one platform &mdash; one statement to residents, one dashboard for your team.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="s3">
+  <div class="sec-hdr" onclick="toggle('s3')">
+    <span class="sec-num">03</span>
+    <span class="sec-title">Community Overview &mdash; Kipling Meadows</span>
+    <span class="sec-chevron">&#8964;</span>
+  </div>
+  <div class="sec-body">
+    <div class="two" style="margin-bottom:.85rem">
+      <div>
+        <div class="kv" style="margin-bottom:0">
+          <div class="kv-row"><div class="k">Location</div><div class="v">Foley, AL (Baldwin County)</div></div>
+          <div class="kv-row"><div class="k">Total homes</div><div class="v orange">118 single-family units</div></div>
+          <div class="kv-row"><div class="k">Total sq ft</div><div class="v">209,662 sq ft</div></div>
+          <div class="kv-row"><div class="k">Site acreage</div><div class="v">&sim;27 acres (est.)</div></div>
+          <div class="kv-row"><div class="k">Utility provider</div><div class="v">Riviera Utilities (Foley)</div></div>
+          <div class="kv-row"><div class="k">Avg utility bill</div><div class="v orange">&sim;$174/month &middot; 14.5&cent;/kWh</div></div>
+          <div class="kv-row"><div class="k">Streets</div><div class="v">Jutland, Leander, Mandalay</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="icard" style="text-align:center">
+          <div class="icard-title" style="text-align:center;margin-bottom:.5rem">Unit mix</div>
+          <div style="font-size:13px;margin-bottom:4px"><span style="font-family:'Fraunces',serif;font-size:20px;color:var(--solar)">38</span> <span style="color:var(--ink-soft)">@ 1,641 sq ft</span></div>
+          <div style="font-size:13px;margin-bottom:4px"><span style="font-family:'Fraunces',serif;font-size:20px;color:var(--solar)">74</span> <span style="color:var(--ink-soft)">@ 1,787 sq ft</span></div>
+          <div style="font-size:13px"><span style="font-family:'Fraunces',serif;font-size:20px;color:var(--solar)">6</span> <span style="color:var(--ink-soft)">@ 2,511 sq ft</span></div>
+        </div>
+        <div class="icard" style="text-align:center">
+          <div style="font-family:'Fraunces',serif;font-size:24px;font-weight:300;color:var(--ink)">5.1 hrs</div>
+          <div style="font-size:11px;color:var(--ink-mute)">peak sun / day &middot; Gulf Coast AL</div>
+          <div style="font-size:10px;color:var(--solar);margin-top:3px">Top 25% nationally</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:.9rem;text-align:center">
+      <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:3px">30.4061&deg;N, 87.7081&deg;W &middot; Foley, Alabama</div>
+      <div style="font-size:12px;color:var(--ink-mute)">Predominantly south-facing rooflines &middot; minimal shading &middot; prime solar geography</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="s4">
+  <div class="sec-hdr" onclick="toggle('s4')">
+    <span class="sec-num">04</span>
+    <span class="sec-title">Rooftop Solar Analysis &mdash; Sample Addresses</span>
+    <span class="sec-chevron">&#8964;</span>
+  </div>
+  <div class="sec-body">
+    <p class="body-txt">Solar potential modeled using Foley, AL field data &mdash; 1,273 kWh/kW/year production factor, consistent with the capital lease model.</p>
+    <table class="tbl">
+      <thead><tr><th>Address</th><th>Sq ft</th><th>System</th><th>Annual output</th><th>Utility offset</th><th>Roof rating</th></tr></thead>
+      <tbody>
+        <tr><td>17697 Jutland Ave</td><td>1,641</td><td>7.0 kW</td><td>8,911 kWh</td><td>$97/mo</td><td>&#9733;&#9733;&#9733;&#9733;&#9733;</td></tr>
+        <tr><td>7930 Mandalay Circle</td><td>2,511</td><td>9.0 kW</td><td>11,457 kWh</td><td>$124/mo</td><td>&#9733;&#9733;&#9733;&#9733;&#9733;</td></tr>
+        <tr><td>17627 Leander Ave</td><td>2,511</td><td>9.0 kW</td><td>11,457 kWh</td><td>$124/mo</td><td>&#9733;&#9733;&#9733;&#9733;&#9734;</td></tr>
+      </tbody>
+    </table>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-val">5.1 hrs</div><div class="stat-label">Peak sun / day</div></div>
+      <div class="stat"><div class="stat-val">1,862</div><div class="stat-label">kWh/m&sup2;/yr irradiance</div></div>
+      <div class="stat"><div class="stat-val">218</div><div class="stat-label">Sunshine days / year</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="s5">
+  <div class="sec-hdr" onclick="toggle('s5')">
+    <span class="sec-num">05</span>
+    <span class="sec-title">Financial Model &mdash; NOI Uplift</span>
+    <span class="sec-chevron">&#8964;</span>
+  </div>
+  <div class="sec-body">
+    <div class="callout">
+      <div class="callout-title">How the economics work — real Foley, AL numbers</div>
+      <div class="callout-body">Riviera Utilities charges tenants ~$174/month (14.5&cent;/kWh). Center Creek pays NOI $109/month (13.70&cent;/kWh — actually cheaper per kWh than the grid). You charge tenants $139 — 20% below utility. Everyone wins: tenants save, you earn, $0 out of pocket.</div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Per-home economics</th><th>Conservative ($135/mo)</th><th>Recommended — 20% off ($139.20/mo)</th><th>Optimistic ($145/mo)</th></tr></thead>
+      <tbody>
+        <tr><td>Riviera Utilities avg bill</td><td>$174/month</td><td>$174/month</td><td>$174/month</td></tr>
+        <tr><td>NOI effective rate</td><td class="orange">13.70&cent;/kWh</td><td class="orange">13.70&cent;/kWh</td><td class="orange">13.70&cent;/kWh</td></tr>
+        <tr><td>NOI capital lease cost</td><td>$109/month</td><td>$109/month</td><td>$109/month</td></tr>
+        <tr><td>Center Creek charges tenant</td><td>$135/month</td><td>$139.20/month</td><td>$145/month</td></tr>
+        <tr><td>Tenant savings vs utility</td><td class="orange">$39/mo &middot; $468/yr</td><td class="orange">$34.80/mo &middot; $417.60/yr</td><td class="orange">$29/mo &middot; $348/yr</td></tr>
+        <tr><td>Gross monthly spread</td><td>$26.00/month</td><td>$30.20/month</td><td>$36.00/month</td></tr>
+        <tr><td>Less NOI fee (5% of spread)</td><td class="muted">&minus;$1.30/month</td><td class="muted">&minus;$1.51/month</td><td class="muted">&minus;$1.80/month</td></tr>
+        <tr class="tot"><td>Net to Center Creek / home</td><td>$24.70/month</td><td><strong>$28.69/month</strong></td><td>$34.20/month</td></tr>
+      </tbody>
+    </table>
+    <table class="tbl">
+      <thead><tr><th>Community-wide (118 homes)</th><th>Conservative</th><th>Recommended (20% off)</th><th>Optimistic</th></tr></thead>
+      <tbody>
+        <tr><td>Monthly</td><td>$2,914</td><td>$3,385</td><td>$4,036</td></tr>
+        <tr><td>Year 1 annual</td><td>$34,975</td><td><strong>$40,625</strong></td><td>$48,427</td></tr>
+        <tr><td>5-year cumulative</td><td>$174,875</td><td>$203,125</td><td>$242,135</td></tr>
+        <tr><td>10-year cumulative</td><td>$349,750</td><td>$406,250</td><td>$484,270</td></tr>
+        <tr class="tot"><td>20-year cumulative</td><td>$699,500</td><td><strong>$812,500</strong></td><td>$968,540</td></tr>
+      </tbody>
+    </table>
+    <div style="background:var(--ink);border-radius:10px;padding:1.1rem;text-align:center;margin-top:.5rem">
+      <div style="font-size:11px;color:#9E9890;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Property value added at 6% cap rate &mdash; solar Phase 1 (20% model)</div>
+      <div style="font-family:'Fraunces',serif;font-size:36px;font-weight:300;color:var(--solar)">+$677,083</div>
+      <div style="font-size:12px;color:#9E9890;margin-top:4px">Based on $40,625 annual NOI &divide; 6% cap rate &middot; Phase 1 solar only</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="s6">
+  <div class="sec-hdr" onclick="toggle('s6')">
+    <span class="sec-num">06</span>
+    <span class="sec-title">Phase 2 &mdash; Battery Storage (EcoFlow)</span>
+    <span class="sec-chevron">&#8964;</span>
+  </div>
+  <div class="sec-body">
+    <div class="two">
+      <div class="icard">
+        <div class="icard-title">EcoFlow DELTA Pro Ultra</div>
+        <ul class="chk">
+          <li>6&ndash;22 kWh usable storage</li>
+          <li>Whole-home backup capability</li>
+          <li>Pairs seamlessly with rooftop solar</li>
+          <li>App-controlled &middot; 10-yr warranty</li>
+          <li>&sim;$4,500/unit financed by NOI</li>
+        </ul>
+      </div>
+      <div class="icard dark">
+        <div class="icard-title">Revenue impact</div>
+        <div class="icard-big">$47,082</div>
+        <div class="icard-body">Annual uplift after 5% fee<br>118 units &times; $35/month add-on<br><br>Critical in hurricane-prone Gulf Coast Alabama &mdash; backup power is a premium amenity.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="s7">
+  <div class="sec-hdr" onclick="toggle('s7')">
+    <span class="sec-num">07</span>
+    <span class="sec-title">Phase 3 &mdash; EV Charging (EcoFlow Smart Charger)</span>
+    <span class="sec-chevron">&#8964;</span>
+  </div>
+  <div class="sec-body">
+    <div class="two">
+      <div class="icard">
+        <div class="icard-title">EcoFlow Level 2 EV Charger</div>
+        <ul class="chk">
+          <li>240V &middot; up to 11.5 kW output</li>
+          <li>Charges most EVs overnight</li>
+          <li>Integrated with solar + battery</li>
+          <li>App-scheduled off-peak charging</li>
+          <li>&sim;$600/unit financed by NOI</li>
+        </ul>
+      </div>
+      <div class="icard dark">
+        <div class="icard-title">Revenue impact</div>
+        <div class="icard-big">$20,178</div>
+        <div class="icard-body">Annual uplift after 5% fee<br>59 units (50% penetration) &times; $30/mo<br><br>Tenants charge their EV for free, powered by their own solar panels.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="s8">
+  <div class="sec-hdr" onclick="toggle('s8')">
+    <span class="sec-num">08</span>
+    <span class="sec-title">Combined Revenue &mdash; All 3 Phases</span>
+    <span class="sec-chevron">&#8964;</span>
+  </div>
+  <div class="sec-body">
+    <table class="tbl">
+      <thead><tr><th>Revenue stream</th><th>Year 1</th><th>Year 5</th><th>Year 10</th><th>Year 20</th></tr></thead>
+      <tbody>
+        <tr><td>Phase 1 solar — conservative ($135/mo)</td><td>$34,975</td><td>$174,875</td><td>$349,750</td><td>$699,500</td></tr>
+        <tr><td>Phase 1 solar — recommended 20% off ($139/mo)</td><td><strong>$40,625</strong></td><td>$203,125</td><td>$406,250</td><td>$812,500</td></tr>
+        <tr><td>+ Phase 2 battery (EcoFlow DELTA Pro Ultra)</td><td>$47,082</td><td>$235,410</td><td>$470,820</td><td>$941,640</td></tr>
+        <tr><td>+ Phase 3 EV charging (EcoFlow L2)</td><td>$20,178</td><td>$100,890</td><td>$201,780</td><td>$403,560</td></tr>
+        <tr class="tot"><td>Total &mdash; all 3 phases (recommended)</td><td>$107,885</td><td>$539,425</td><td>$1,078,850</td><td>$2,157,700</td></tr>
+      </tbody>
+    </table>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="background:var(--ink);border-radius:10px;padding:1.1rem;text-align:center">
+        <div style="font-size:10px;color:#9E9890;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">10-year total &middot; all phases</div>
+        <div style="font-family:'Fraunces',serif;font-size:30px;font-weight:300;color:#fff">$1,078,850+</div>
+      </div>
+      <div style="background:var(--ink);border-radius:10px;padding:1.1rem;text-align:center">
+        <div style="font-size:10px;color:#9E9890;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Asset value added @ 6% cap rate</div>
+        <div style="font-family:'Fraunces',serif;font-size:30px;font-weight:300;color:var(--solar)">+$1.8M</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="s9">
+  <div class="sec-hdr" onclick="toggle('s9')">
+    <span class="sec-num">09</span>
+    <span class="sec-title">Implementation Timeline</span>
+    <span class="sec-chevron">&#8964;</span>
+  </div>
+  <div class="sec-body">
+    <div class="tl">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-phase">Week 1&ndash;2</div><div class="tl-label">Agreement</div><div class="tl-desc">Partnership agreement executed. Capital lease term sheet issued. NOI team mobilizes.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-phase">Week 3&ndash;4</div><div class="tl-label">Design</div><div class="tl-desc">Drone aerial and site survey of all 118 rooftops. Structural and shading analysis per unit.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-phase">Week 5&ndash;6</div><div class="tl-label">Permits</div><div class="tl-desc">Building permits filed for all 118 homes. Utility interconnection submitted to Riviera Utilities.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-phase">Week 7&ndash;8</div><div class="tl-label">Tenant prep</div><div class="tl-desc">NOI drafts tenant notification letters and solar addendum. Center Creek reviews and distributes.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-phase">Month 3&ndash;4</div><div class="tl-label">Equipment</div><div class="tl-desc">Panels, inverters, and racking ordered and delivered to Foley staging area.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-phase">Month 4&ndash;6</div><div class="tl-label">Installation wave 1</div><div class="tl-desc">&sim;60 homes on Jutland Ave and Mandalay Circle installed and commissioned.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-phase">Month 6&ndash;8</div><div class="tl-label">Installation wave 2</div><div class="tl-desc">&sim;58 remaining homes on Leander Ave and Mandalay. Full grid interconnection.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-phase">Month 8&ndash;9</div><div class="tl-label">Billing launch</div><div class="tl-desc">All 118 systems live. Tenant billing begins. First revenue remittance to Center Creek Capital.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--ink-mute)"></div><div class="tl-phase" style="color:var(--ink-mute)">Ongoing</div><div class="tl-label">Operations</div><div class="tl-desc">Monthly monitoring, maintenance, billing, and revenue distributions indefinitely.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="s10">
+  <div class="sec-hdr" onclick="toggle('s10')">
+    <span class="sec-num">10</span>
+    <span class="sec-title">Key Terms &amp; Signature</span>
+    <span class="sec-chevron">&#8964;</span>
+  </div>
+  <div class="sec-body">
+    <div class="kv">
+      <div class="kv-row"><div class="k">Program scope</div><div class="v">118 homes, Kipling Meadows, Foley AL</div></div>
+      <div class="kv-row"><div class="k">Capital required</div><div class="v orange">$0 &mdash; zero out-of-pocket</div></div>
+      <div class="kv-row"><div class="k">Lease rate</div><div class="v">8.99% &mdash; sourced by NOI</div></div>
+      <div class="kv-row"><div class="k">Gross system cost</div><div class="v">$2.75/watt ($19,250&ndash;$24,750/home)</div></div>
+      <div class="kv-row"><div class="k">Lease term</div><div class="v">20 years from installation</div></div>
+      <div class="kv-row"><div class="k">NOI monthly cost to CC</div><div class="v">$109/home/month (blended)</div></div>
+      <div class="kv-row"><div class="k">Tenant charge (recommended)</div><div class="v orange">$139.20/month &mdash; 20% below $174 utility</div></div>
+      <div class="kv-row"><div class="k">NOI service fee</div><div class="v">5% of monthly spread</div></div>
+      <div class="kv-row"><div class="k">Revenue remittance</div><div class="v">Monthly, within 5 business days</div></div>
+      <div class="kv-row"><div class="k">Exclusivity window</div><div class="v">90 days from signing</div></div>
+      <div class="kv-row"><div class="k">Offer valid until</div><div class="v red">June 30, 2026</div></div>
+    </div>
+    <p class="body-txt">By executing below, Center Creek Capital authorizes NOI to proceed with site survey, system design, capital lease structuring, and permitting for Kipling Meadows.</p>
+    <div class="sig">
+      <div class="sig-side left">
+        <div class="sig-party">NOI &mdash; Authorized Representative</div>
+        <div class="sig-line"></div><div class="sig-lbl">Signature</div>
+        <div class="sig-line"></div><div class="sig-lbl">Printed name &amp; title</div>
+        <div class="sig-line"></div><div class="sig-lbl">Date</div>
+        <div class="sig-entity">NOI Energy Services</div>
+        <div class="sig-url">joinnoi.com</div>
+      </div>
+      <div class="sig-side right">
+        <div class="sig-party">Center Creek Capital &mdash; Authorized Representative</div>
+        <div class="sig-line"></div><div class="sig-lbl">Signature</div>
+        <div class="sig-line"></div><div class="sig-lbl">Printed name &amp; title</div>
+        <div class="sig-line"></div><div class="sig-lbl">Date</div>
+        <div class="sig-entity" style="color:var(--ink)">Center Creek Capital</div>
+        <div class="sig-url">centercreekcapital.com</div>
+      </div>
+    </div>
+    <div class="validity">Offer valid through <strong>June 30, 2026</strong> &middot; Questions? Contact your NOI representative at <strong>joinnoi.com</strong></div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+function toggle(id){
+  var b=document.querySelector('#'+id+' .sec-body');
+  var c=document.querySelector('#'+id+' .sec-chevron');
+  var open=b.classList.contains('open');
+  b.classList.toggle('open',!open);
+  b.style.display=open?'none':'block';
+  c.classList.toggle('open',!open);
+}
+function openSec(id){
+  var b=document.querySelector('#'+id+' .sec-body');
+  var c=document.querySelector('#'+id+' .sec-chevron');
+  b.classList.add('open');
+  b.style.display='block';
+  c.classList.add('open');
+  b.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function toggleAll(){
+  var btn=document.querySelector('.expand-btn');
+  var bodies=document.querySelectorAll('.sec-body');
+  var chevrons=document.querySelectorAll('.sec-chevron');
+  var anyHidden=[].some.call(bodies,function(b){return !b.classList.contains('open')});
+  bodies.forEach(function(b){b.classList.toggle('open',anyHidden);b.style.display=anyHidden?'block':'none'});
+  chevrons.forEach(function(c){c.classList.toggle('open',anyHidden)});
+  btn.textContent=anyHidden?'Collapse all':'Expand all';
+}
+document.querySelectorAll('.sec-body').forEach(function(b){
+  if(!b.classList.contains('open'))b.style.display='none';
+  else b.style.display='block';
+});
+</script>
+</body>
+</html>
