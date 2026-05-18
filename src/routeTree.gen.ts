@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as KiplingMeadowsRouteImport } from './routes/kipling-meadows'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EconomicsRouteImport } from './routes/economics'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -25,6 +26,11 @@ const ProcessRoute = ProcessRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KiplingMeadowsRoute = KiplingMeadowsRouteImport.update({
+  id: '/kipling-meadows',
+  path: '/kipling-meadows',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
+  '/kipling-meadows': typeof KiplingMeadowsRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
+  '/kipling-meadows': typeof KiplingMeadowsRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
+  '/kipling-meadows': typeof KiplingMeadowsRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/economics'
     | '/faq'
+    | '/kipling-meadows'
     | '/pricing'
     | '/process'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/economics'
     | '/faq'
+    | '/kipling-meadows'
     | '/pricing'
     | '/process'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/economics'
     | '/faq'
+    | '/kipling-meadows'
     | '/pricing'
     | '/process'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   EconomicsRoute: typeof EconomicsRoute
   FaqRoute: typeof FaqRoute
+  KiplingMeadowsRoute: typeof KiplingMeadowsRoute
   PricingRoute: typeof PricingRoute
   ProcessRoute: typeof ProcessRoute
 }
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kipling-meadows': {
+      id: '/kipling-meadows'
+      path: '/kipling-meadows'
+      fullPath: '/kipling-meadows'
+      preLoaderRoute: typeof KiplingMeadowsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   EconomicsRoute: EconomicsRoute,
   FaqRoute: FaqRoute,
+  KiplingMeadowsRoute: KiplingMeadowsRoute,
   PricingRoute: PricingRoute,
   ProcessRoute: ProcessRoute,
 }
