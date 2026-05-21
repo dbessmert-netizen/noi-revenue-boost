@@ -39,10 +39,8 @@ body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink)}
 
 /* ─── NAV ─── */
 nav{background:var(--paper);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;position:relative;z-index:100}
-.noi-logo{display:flex;align-items:center;gap:10px}
-.noi-icon-sm{width:32px;height:32px;background:var(--solar);border-radius:7px;display:flex;align-items:center;justify-content:center}
-.noi-icon-sm svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.noi-wordmark{font-family:'Fraunces',serif;font-size:20px;font-weight:300;color:var(--ink);letter-spacing:-.3px}
+.noi-logo{display:inline-flex;align-items:center;text-decoration:none}
+.noi-wordmark{font-family:'Fraunces',serif;font-size:26px;font-weight:300;color:var(--ink);letter-spacing:-.5px;line-height:1}
 .noi-wordmark span{color:var(--solar)}
 .nav-right{display:flex;align-items:center;gap:.6rem}
 .nav-cta{font-size:12px;padding:7px 18px;background:var(--solar);color:#fff;border:none;border-radius:20px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;letter-spacing:.2px;transition:background .15s}
@@ -233,12 +231,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 ════════════════════════════════ -->
 <div class="page" id="page1">
   <nav>
-    <div class="noi-logo">
-      <div class="noi-icon-sm">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
-      </div>
+    <a class="noi-logo" href="/" aria-label="NOI home">
       <div class="noi-wordmark">NOI<span>.</span></div>
-    </div>
+    </a>
     <div class="nav-right">
       <button class="nav-pdf" onclick="downloadPDF()">
         <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -360,12 +355,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
         <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Download PDF
       </button>
-      <div class="noi-logo">
-        <div class="noi-icon-sm">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
-        </div>
+      <a class="noi-logo" href="/" aria-label="NOI home">
         <div class="noi-wordmark">NOI<span>.</span></div>
-      </div>
+      </a>
     </div>
   </div>
 
@@ -470,9 +462,6 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <!-- Brand center -->
     <div class="cs-brand">
       <div class="cs-brand-logo">
-        <div class="cs-brand-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
-        </div>
         <div class="cs-brand-wm">NOI<span>.</span></div>
       </div>
       <div class="cs-tagline">Solar income for property owners.<br>Finance · Install · Bill · Collect</div>
