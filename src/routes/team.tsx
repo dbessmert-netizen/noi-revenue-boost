@@ -198,6 +198,31 @@ function TeamPage() {
           </div>
         </div>
       </section>
+
+      {/* Partners CTA */}
+      <section className="border-t border-border bg-[color:var(--paper-deep)]">
+        <div className="mx-auto max-w-5xl px-6 py-20 text-center">
+          <div className="eyebrow text-[color:var(--solar)]">Work with NOI</div>
+          <h2 className="mt-4 font-display text-3xl leading-tight md:text-4xl">
+            Want to partner or join the team?
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-[color:var(--ink-soft)]">
+            NOI is expanding fast across all 50 states. We are actively looking for growth-minded
+            partners — sales professionals, property consultants, and solar specialists — who want
+            to turn idle rooftops into real revenue. We offer competitive benefit packages and
+            revenue-share structures that scale with your portfolio reach.
+          </p>
+          <div className="mt-8">
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center rounded-full bg-foreground px-8 py-3 text-sm font-medium text-[color:var(--paper)] transition hover:opacity-90"
+            >
+              Send us a message
+              <span aria-hidden className="ml-2">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
     </SiteLayout>
   );
 }
