@@ -117,6 +117,9 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Animated product walkthrough */}
+      <ProductWalkthrough />
+
       {/* Mechanism / How it works */}
       <section className="mx-auto max-w-6xl px-6 py-24">
         <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
