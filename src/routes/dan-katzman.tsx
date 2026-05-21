@@ -3,7 +3,7 @@ import { seo } from "@/lib/seo";
 
 const PARAMS = new URLSearchParams({
   name: "Dan Katzman",
-  title: "Solar Growth Consultant · All States",
+  title: "CEO & Founder",
   phone: "(917) 748-5280",
   email: "dan@joinnoi.com",
   photo: "https://joinnoi.com/dan-katzman.jpg",
