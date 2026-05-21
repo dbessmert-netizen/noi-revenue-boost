@@ -611,22 +611,85 @@ function recalc(){
 function goToCalc(){ document.getElementById('page2').scrollIntoView({behavior:'smooth'}) }
 function goToP1(){   document.getElementById('page1').scrollIntoView({behavior:'smooth'}) }
 
-/* ── PDF DOWNLOAD ── */
+/* ── PDF DOWNLOAD ──
+   Renders each .page into its own A4-landscape PDF page (max 2 pages).
+   Forces a fixed capture width so output is deterministic across viewports. */
+function waitForImages(root){
+  var imgs = root.querySelectorAll('img');
+  return Promise.all(Array.prototype.map.call(imgs, function(img){
+    if(img.complete && img.naturalWidth > 0) return Promise.resolve();
+    return new Promise(function(res){
+      img.addEventListener('load', res, {once:true});
+      img.addEventListener('error', res, {once:true});
+    });
+  }));
+}
+
 function downloadPDF(){
+  var btns = document.querySelectorAll('.nav-pdf, .nav-pdf2');
+  btns.forEach(function(b){ b.disabled = true; b.style.opacity = .5; });
+
   var repSlug = REP_NAME.replace(/[^a-z0-9]/gi,'_');
-  var opt = {
-    margin: 0,
-    filename: 'NOI_Solar_Pitch_'+repSlug+'.pdf',
-    image: { type:'jpeg', quality:.95 },
-    html2canvas: { scale:2, useCORS:true, letterRendering:true },
-    jsPDF: { unit:'mm', format:'a4', orientation:'landscape' },
-    pagebreak: { mode:['css','legacy'], before:'#page2' }
-  };
-  // Temporarily disable scroll-snap for capture
+  var pages = [document.getElementById('page1'), document.getElementById('page2')];
+
+  var CAPTURE_WIDTH = 1400; // px
+  var prevSnap = document.documentElement.style.scrollSnapType;
   document.documentElement.style.scrollSnapType = 'none';
-  document.getElementById('page1').style.pageBreakAfter = 'always';
-  html2pdf().set(opt).from(document.body).save().then(function(){
-    document.documentElement.style.scrollSnapType = '';
+
+  var prevStyles = pages.map(function(p){
+    var s = { width:p.style.width, minHeight:p.style.minHeight, height:p.style.height };
+    p.style.width = CAPTURE_WIDTH + 'px';
+    p.style.minHeight = '0';
+    p.style.height = 'auto';
+    return s;
+  });
+
+  function cleanup(){
+    pages.forEach(function(p,i){
+      p.style.width = prevStyles[i].width;
+      p.style.minHeight = prevStyles[i].minHeight;
+      p.style.height = prevStyles[i].height;
+    });
+    document.documentElement.style.scrollSnapType = prevSnap;
+    btns.forEach(function(b){ b.disabled = false; b.style.opacity = 1; });
+  }
+
+  waitForImages(document.body).then(function(){
+    var JsPDF = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+    var pdf = new JsPDF({ unit:'mm', format:'a4', orientation:'landscape' });
+    var pdfW = 297, pdfH = 210;
+
+    function renderPage(idx){
+      if(idx >= pages.length){
+        pdf.save('NOI_Solar_Pitch_'+repSlug+'.pdf');
+        cleanup();
+        return;
+      }
+      html2canvas(pages[idx], {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#F4EFE6',
+        windowWidth: CAPTURE_WIDTH,
+        width: CAPTURE_WIDTH,
+        height: pages[idx].scrollHeight
+      }).then(function(canvas){
+        // Convert canvas (captured at scale 2 from 96dpi CSS px) → mm
+        var imgWmm = canvas.width  / 2 * 25.4 / 96;
+        var imgHmm = canvas.height / 2 * 25.4 / 96;
+        var scale = Math.min(pdfW / imgWmm, pdfH / imgHmm);
+        var drawW = imgWmm * scale;
+        var drawH = imgHmm * scale;
+        var x = (pdfW - drawW) / 2;
+        var y = (pdfH - drawH) / 2;
+        if(idx > 0) pdf.addPage('a4','landscape');
+        pdf.addImage(canvas.toDataURL('image/jpeg', 0.92), 'JPEG', x, y, drawW, drawH);
+        renderPage(idx + 1);
+      }).catch(function(err){
+        console.error('PDF render error', err);
+        cleanup();
+      });
+    }
+    renderPage(0);
   });
 }
 
