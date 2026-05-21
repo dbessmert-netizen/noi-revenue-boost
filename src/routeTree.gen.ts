@@ -9,17 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TeamRouteImport } from './routes/team'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as KiplingMeadowsRouteImport } from './routes/kipling-meadows'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EconomicsRouteImport } from './routes/economics'
-import { Route as DanielBessmertRouteImport } from './routes/daniel-bessmert'
-import { Route as DanKatzmanRouteImport } from './routes/dan-katzman'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TeamSlugRouteImport } from './routes/team_.$slug'
 
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProcessRoute = ProcessRouteImport.update({
   id: '/process',
   path: '/process',
@@ -45,16 +50,6 @@ const EconomicsRoute = EconomicsRouteImport.update({
   path: '/economics',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DanielBessmertRoute = DanielBessmertRouteImport.update({
-  id: '/daniel-bessmert',
-  path: '/daniel-bessmert',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DanKatzmanRoute = DanKatzmanRouteImport.update({
-  id: '/dan-katzman',
-  path: '/dan-katzman',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -70,43 +65,48 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeamSlugRoute = TeamSlugRouteImport.update({
+  id: '/team_/$slug',
+  path: '/team/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
-  '/dan-katzman': typeof DanKatzmanRoute
-  '/daniel-bessmert': typeof DanielBessmertRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling-meadows': typeof KiplingMeadowsRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
+  '/team': typeof TeamRoute
+  '/team/$slug': typeof TeamSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
-  '/dan-katzman': typeof DanKatzmanRoute
-  '/daniel-bessmert': typeof DanielBessmertRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling-meadows': typeof KiplingMeadowsRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
+  '/team': typeof TeamRoute
+  '/team/$slug': typeof TeamSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
-  '/dan-katzman': typeof DanKatzmanRoute
-  '/daniel-bessmert': typeof DanielBessmertRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling-meadows': typeof KiplingMeadowsRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
+  '/team': typeof TeamRoute
+  '/team_/$slug': typeof TeamSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -114,54 +114,61 @@ export interface FileRouteTypes {
     | '/'
     | '/compare'
     | '/contact'
-    | '/dan-katzman'
-    | '/daniel-bessmert'
     | '/economics'
     | '/faq'
     | '/kipling-meadows'
     | '/pricing'
     | '/process'
+    | '/team'
+    | '/team/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/compare'
     | '/contact'
-    | '/dan-katzman'
-    | '/daniel-bessmert'
     | '/economics'
     | '/faq'
     | '/kipling-meadows'
     | '/pricing'
     | '/process'
+    | '/team'
+    | '/team/$slug'
   id:
     | '__root__'
     | '/'
     | '/compare'
     | '/contact'
-    | '/dan-katzman'
-    | '/daniel-bessmert'
     | '/economics'
     | '/faq'
     | '/kipling-meadows'
     | '/pricing'
     | '/process'
+    | '/team'
+    | '/team_/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompareRoute: typeof CompareRoute
   ContactRoute: typeof ContactRoute
-  DanKatzmanRoute: typeof DanKatzmanRoute
-  DanielBessmertRoute: typeof DanielBessmertRoute
   EconomicsRoute: typeof EconomicsRoute
   FaqRoute: typeof FaqRoute
   KiplingMeadowsRoute: typeof KiplingMeadowsRoute
   PricingRoute: typeof PricingRoute
   ProcessRoute: typeof ProcessRoute
+  TeamRoute: typeof TeamRoute
+  TeamSlugRoute: typeof TeamSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/process': {
       id: '/process'
       path: '/process'
@@ -197,20 +204,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EconomicsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/daniel-bessmert': {
-      id: '/daniel-bessmert'
-      path: '/daniel-bessmert'
-      fullPath: '/daniel-bessmert'
-      preLoaderRoute: typeof DanielBessmertRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dan-katzman': {
-      id: '/dan-katzman'
-      path: '/dan-katzman'
-      fullPath: '/dan-katzman'
-      preLoaderRoute: typeof DanKatzmanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -232,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/team_/$slug': {
+      id: '/team_/$slug'
+      path: '/team/$slug'
+      fullPath: '/team/$slug'
+      preLoaderRoute: typeof TeamSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -239,14 +239,23 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompareRoute: CompareRoute,
   ContactRoute: ContactRoute,
-  DanKatzmanRoute: DanKatzmanRoute,
-  DanielBessmertRoute: DanielBessmertRoute,
   EconomicsRoute: EconomicsRoute,
   FaqRoute: FaqRoute,
   KiplingMeadowsRoute: KiplingMeadowsRoute,
   PricingRoute: PricingRoute,
   ProcessRoute: ProcessRoute,
+  TeamRoute: TeamRoute,
+  TeamSlugRoute: TeamSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
