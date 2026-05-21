@@ -392,85 +392,69 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 
       <div class="sg">
         <div class="sg-top">
-          <span class="sg-name">Number of units</span>
-          <span class="sg-val" id="lbl-units">118</span>
+          <span class="sg-name">Units</span>
+          <span class="sg-val" id="lbl-units">12</span>
         </div>
-        <input type="range" id="sl-units" min="1" max="500" value="118" step="1" oninput="recalc()">
-        <div class="sg-range"><span>1</span><span>500</span></div>
+        <input type="range" id="sl-units" min="1" max="250" value="12" step="1" oninput="recalc()">
+        <div class="sg-range"><span>1</span><span>250</span></div>
       </div>
 
       <hr class="cdiv">
 
       <div class="sg">
         <div class="sg-top">
-          <span class="sg-name">Avg utility bill / unit</span>
-          <span class="sg-val" id="lbl-bill">$174 <span class="sg-unit">/ mo</span></span>
+          <span class="sg-name">Monthly kWh / unit</span>
+          <span class="sg-val" id="lbl-kwh">850 <span class="sg-unit">kWh</span></span>
         </div>
-        <input type="range" id="sl-bill" min="80" max="350" value="174" step="1" oninput="recalc()">
-        <div class="sg-range"><span>$80</span><span class="note">Grid ref.</span><span>$350</span></div>
+        <input type="range" id="sl-kwh" min="300" max="1500" value="850" step="10" oninput="recalc()">
+        <div class="sg-range"><span>300 kWh</span><span>1500 kWh</span></div>
       </div>
 
       <hr class="cdiv">
 
       <div class="sg">
         <div class="sg-top">
-          <span class="sg-name">Your discount off utility bill</span>
-          <span class="sg-val" id="lbl-disc">20 <span class="sg-unit">%</span></span>
+          <span class="sg-name">Tenant price</span>
+          <span class="sg-val" id="lbl-tenant">$0.22 <span class="sg-unit">/ kWh</span></span>
         </div>
-        <input type="range" id="sl-disc" min="5" max="40" value="20" step="1" oninput="recalc()">
-        <div class="sg-range"><span>5%</span><span class="note">Sweet spot 15–25%</span><span>40%</span></div>
+        <input type="range" id="sl-tenant" min="0.10" max="0.35" value="0.22" step="0.005" oninput="recalc()">
+        <div class="sg-range"><span>$0.10</span><span class="note">Grid ref. $0.29</span><span>$0.35</span></div>
+      </div>
+
+      <hr class="cdiv">
+
+      <div class="sg">
+        <div class="sg-top">
+          <span class="sg-name">Solar cost (you)</span>
+          <span class="sg-val" id="lbl-solar">$0.11 <span class="sg-unit">/ kWh</span></span>
+        </div>
+        <input type="range" id="sl-solar" min="0.05" max="0.20" value="0.11" step="0.005" oninput="recalc()">
+        <div class="sg-range"><span>$0.05</span><span>$0.20</span></div>
       </div>
 
       <div class="usumm">
-        <div class="us"><div class="us-v" id="su-tc">$139</div><div class="us-l">Tenant pays / mo</div></div>
-        <div class="us"><div class="us-v sol" id="su-nu">$28.69</div><div class="us-l">Net to you / unit</div></div>
-        <div class="us"><div class="us-v" id="su-sv">$35</div><div class="us-l">Tenant saves / mo</div></div>
+        <div class="us"><div class="us-v" id="su-pum">$94</div><div class="us-l">Revenue / unit / mo</div></div>
+        <div class="us"><div class="us-v" id="su-puy">$1,122</div><div class="us-l">Revenue / unit / yr</div></div>
+        <div class="us"><div class="us-v sol" id="su-sv">$59</div><div class="us-l">Tenant saves / mo</div></div>
       </div>
 
-      <div class="warn-box" id="warn-box">⚠ Thin margin — recommend keeping tenant charge at least $20 above the NOI lease cost ($109/mo).</div>
-
-      <div style="background:var(--card);border-radius:8px;padding:.85rem 1rem;font-size:12px;color:var(--ink-soft);line-height:1.7">
-        <strong style="color:var(--ink)">NOI lease cost (fixed): $109/home/month</strong><br>
-        8.99% capital lease · 20-year term · 40% ITC passed to you<br>
-        Effective rate: 13.70¢/kWh — cheaper than grid<br>
-        <span style="color:var(--solar);font-weight:500">★ Bloomberg Tier 1 panels · US-focused manufacturers · NOI handles full installation, contracting &amp; billing</span>
-      </div>
+      <div class="warn-box" id="warn-box">⚠ Thin margin — tenant price is at or below your solar cost. Raise the tenant price to create spread.</div>
     </div>
 
     <div class="calc-right">
       <div class="calc-head">Your NOI uplift</div>
-      <div class="res-big" id="res-annual">$40,625</div>
+      <div class="res-big" id="res-annual">$12,791</div>
       <div class="res-sub">Net annual revenue, after platform fee</div>
 
       <div>
-        <div class="rrow"><span class="rk">Tenant charge / unit</span><span class="rv" id="r-tenant">$139.20 / mo</span></div>
-        <div class="rrow"><span class="rk">NOI lease cost (you pay)</span><span class="rv">$109.00 / mo</span></div>
-        <div class="rrow"><span class="rk">Gross spread / unit</span><span class="rv" id="r-spread">$30.20 / mo</span></div>
-        <div class="rrow"><span class="rk">NOI platform fee (5%)</span><span class="rv" id="r-fee" style="color:var(--ink-mute)">−$1.51 / mo</span></div>
-        <div class="rrow" style="border-bottom:2px solid rgba(45,80,22,.2)"><span class="rk" style="font-weight:600;color:var(--ink)">Net / unit / month</span><span class="rv big" id="r-net">$28.69</span></div>
-        <div class="rrow"><span class="rk">Property monthly revenue</span><span class="rv" id="r-monthly">$3,385</span></div>
-        <div class="rrow"><span class="rk">Property annual revenue</span><span class="rv" id="r-annual-row">$40,625</span></div>
-        <div class="rrow"><span class="rk">NOI platform fee (annual)</span><span class="rv" id="r-fee-annual" style="color:var(--ink-mute)">−$2,139</span></div>
-        <div class="rrow"><span class="rk" style="font-weight:600;color:var(--ink)">Annual NOI uplift</span><span class="rv big" id="r-uplift">$40,625</span></div>
+        <div class="rrow"><span class="rk">Property monthly revenue</span><span class="rv" id="r-monthly">$1,122</span></div>
+        <div class="rrow"><span class="rk">Property annual revenue</span><span class="rv" id="r-annual-row">$13,464</span></div>
+        <div class="rrow"><span class="rk">NOI platform fee (5%)</span><span class="rv" id="r-fee-annual" style="color:var(--ink-mute)">−$673</span></div>
+        <div class="rrow" style="border-bottom:2px solid rgba(45,80,22,.2)"><span class="rk" style="font-weight:600;color:var(--ink)">Annual NOI uplift</span><span class="rv big" id="r-uplift">$12,791</span></div>
       </div>
 
-      <div class="sav">
-        <div class="sav-ico">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div>
-          <div class="sav-v" id="sb-val">$34.80 / month</div>
-          <div class="sav-l">each tenant saves vs. their utility bill — the easiest lease addendum they'll ever sign</div>
-        </div>
-      </div>
-
-      <div class="pvc">
-        <div class="pvc-l">Property value added @ 6% cap rate · Solar Phase 1</div>
-        <div class="pvc-v" id="pvc-val">+$677,083</div>
-        <div class="pvc-s">Add battery storage &amp; EV charging for additional uplift</div>
-      </div>
-
-      <button class="cta-b" id="cta-contact-btn">Get your custom rooftop model → joinnoi.com</button>
+      <button class="cta-b" id="cta-contact-btn">Get my real estimate → joinnoi.com</button>
+      <div style="text-align:center;font-size:11px;color:var(--ink-mute);margin-top:-.5rem">We'll model your specific roof using a recent utility bill.</div>
     </div>
   </div>
 
@@ -575,50 +559,47 @@ function initContact(){
 }
 
 /* ── CALCULATOR ── */
-var NOI_LEASE = 109;
+var GRID_REF = 0.29;
 
 function fmt$(n){
   if(Math.abs(n) >= 1000000) return '$'+(n/1000000).toFixed(2)+'M';
   return '$'+Math.round(Math.abs(n)).toLocaleString('en-US');
 }
-function fd(n,d){ return '$'+Math.abs(n).toFixed(d); }
 
 function recalc(){
-  var units = +document.getElementById('sl-units').value;
-  var bill  = +document.getElementById('sl-bill').value;
-  var disc  = +document.getElementById('sl-disc').value;
+  var units  = +document.getElementById('sl-units').value;
+  var kwh    = +document.getElementById('sl-kwh').value;
+  var tenant = +document.getElementById('sl-tenant').value;
+  var solar  = +document.getElementById('sl-solar').value;
 
-  document.getElementById('lbl-units').textContent = units;
-  document.getElementById('lbl-bill').innerHTML = '$'+bill+' <span class="sg-unit">/ mo</span>';
-  document.getElementById('lbl-disc').innerHTML = disc+' <span class="sg-unit">%</span>';
+  document.getElementById('lbl-units').textContent  = units;
+  document.getElementById('lbl-kwh').innerHTML      = kwh+' <span class="sg-unit">kWh</span>';
+  document.getElementById('lbl-tenant').innerHTML   = '$'+tenant.toFixed(2)+' <span class="sg-unit">/ kWh</span>';
+  document.getElementById('lbl-solar').innerHTML    = '$'+solar.toFixed(2)+' <span class="sg-unit">/ kWh</span>';
 
-  var tc  = bill * (1 - disc/100);
-  var sv  = bill - tc;
-  var sp  = tc - NOI_LEASE;
-  var fee = Math.max(sp * 0.05, 0);
-  var net = Math.max(sp - fee, 0);
-  var mo  = net * units;
-  var an  = mo * 12;
-  var pv  = an / 0.06;
+  var margin     = Math.max(0, tenant - solar);
+  var perUnitMo  = kwh * margin;
+  var perUnitYr  = perUnitMo * 12;
+  var propertyMo = perUnitMo * units;
+  var propertyYr = propertyMo * 12;
+  var feeMo      = propertyMo * 0.05;
+  var feeYr      = feeMo * 12;
+  var netYr      = (propertyMo - feeMo) * 12;
+  var saves      = kwh * (GRID_REF - tenant);
 
-  document.getElementById('warn-box').style.display = (sp < 15) ? 'block' : 'none';
+  document.getElementById('warn-box').style.display = (margin <= 0) ? 'block' : 'none';
 
-  document.getElementById('su-tc').textContent = '$'+Math.round(tc);
-  document.getElementById('su-nu').textContent = net > 0 ? fd(net,2) : '$0';
-  document.getElementById('su-sv').textContent = '$'+Math.round(sv);
+  document.getElementById('su-pum').textContent = fmt$(perUnitMo);
+  document.getElementById('su-puy').textContent = fmt$(perUnitYr);
+  document.getElementById('su-sv').textContent  = (saves > 0 ? fmt$(saves) : '$0');
 
-  document.getElementById('res-annual').textContent = an > 0 ? fmt$(an) : '$0';
-  document.getElementById('r-tenant').textContent   = fd(tc,2)+' / mo';
-  document.getElementById('r-spread').textContent   = fd(Math.max(sp,0),2)+' / mo';
-  document.getElementById('r-fee').textContent      = '−'+fd(fee,2)+' / mo';
-  document.getElementById('r-net').textContent      = fd(Math.max(net,0),2);
-  document.getElementById('r-monthly').textContent  = mo > 0 ? fmt$(mo) : '$0';
-  document.getElementById('r-annual-row').textContent = an > 0 ? fmt$(an) : '$0';
-  document.getElementById('r-fee-annual').textContent = '−'+fmt$(fee*units*12);
-  document.getElementById('r-uplift').textContent   = an > 0 ? fmt$(an) : '$0';
-  document.getElementById('sb-val').textContent     = fd(sv,2)+' / month';
-  document.getElementById('pvc-val').textContent    = pv > 0 ? '+'+fmt$(pv) : '$0';
+  document.getElementById('res-annual').textContent   = fmt$(netYr);
+  document.getElementById('r-monthly').textContent    = fmt$(propertyMo);
+  document.getElementById('r-annual-row').textContent = fmt$(propertyYr);
+  document.getElementById('r-fee-annual').textContent = '−'+fmt$(feeYr);
+  document.getElementById('r-uplift').textContent     = fmt$(netYr);
 }
+
 
 /* ── NAVIGATION ── */
 function goToCalc(){ document.getElementById('page2').scrollIntoView({behavior:'smooth'}) }
