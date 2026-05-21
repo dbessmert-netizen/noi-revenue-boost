@@ -14,6 +14,7 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as KiplingMeadowsRouteImport } from './routes/kipling-meadows'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EconomicsRouteImport } from './routes/economics'
+import { Route as DanielBessmertRouteImport } from './routes/daniel-bessmert'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as IndexRouteImport } from './routes/index'
@@ -43,6 +44,11 @@ const EconomicsRoute = EconomicsRouteImport.update({
   path: '/economics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DanielBessmertRoute = DanielBessmertRouteImport.update({
+  id: '/daniel-bessmert',
+  path: '/daniel-bessmert',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
+  '/daniel-bessmert': typeof DanielBessmertRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling-meadows': typeof KiplingMeadowsRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
+  '/daniel-bessmert': typeof DanielBessmertRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling-meadows': typeof KiplingMeadowsRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
+  '/daniel-bessmert': typeof DanielBessmertRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling-meadows': typeof KiplingMeadowsRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/compare'
     | '/contact'
+    | '/daniel-bessmert'
     | '/economics'
     | '/faq'
     | '/kipling-meadows'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/compare'
     | '/contact'
+    | '/daniel-bessmert'
     | '/economics'
     | '/faq'
     | '/kipling-meadows'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/'
     | '/compare'
     | '/contact'
+    | '/daniel-bessmert'
     | '/economics'
     | '/faq'
     | '/kipling-meadows'
@@ -127,6 +139,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompareRoute: typeof CompareRoute
   ContactRoute: typeof ContactRoute
+  DanielBessmertRoute: typeof DanielBessmertRoute
   EconomicsRoute: typeof EconomicsRoute
   FaqRoute: typeof FaqRoute
   KiplingMeadowsRoute: typeof KiplingMeadowsRoute
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EconomicsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/daniel-bessmert': {
+      id: '/daniel-bessmert'
+      path: '/daniel-bessmert'
+      fullPath: '/daniel-bessmert'
+      preLoaderRoute: typeof DanielBessmertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -199,6 +219,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompareRoute: CompareRoute,
   ContactRoute: ContactRoute,
+  DanielBessmertRoute: DanielBessmertRoute,
   EconomicsRoute: EconomicsRoute,
   FaqRoute: FaqRoute,
   KiplingMeadowsRoute: KiplingMeadowsRoute,
@@ -208,12 +229,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

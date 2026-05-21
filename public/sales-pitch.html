@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOI — Solar Income for Property Owners</title>
+<!--
+  ════════════════════════════════════════════════════════════════
+  NOI SALES PITCH — 2-PAGE INTERACTIVE PRESENTATION
+  ════════════════════════════════════════════════════════════════
+  PERSONALIZE FOR EACH SALES REP via URL parameters:
+
+  file.html?name=Jane+Smith&title=Solar+Consultant&phone=555-0100&email=jane@joinnoi.com&photo=https://yourphoto.com/jane.jpg
+
+  Parameters:
+    name    — Sales rep full name    (default: Your Name)
+    title   — Their title            (default: Solar Growth Consultant)
+    phone   — Phone number           (default: shown as placeholder)
+    email   — Email address          (default: shown as placeholder)
+    photo   — URL to headshot image  (default: shows initials avatar)
+    qr      — Custom QR URL          (default: https://joinnoi.com)
+  ════════════════════════════════════════════════════════════════
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#F4EFE6;--card:#EFEBE3;--rule:#DDD8CF;--ink:#1A1714;
+  --ink-soft:#6B6560;--ink-mute:#9E9890;--solar:#E8541C;
+  --solar-light:#FBE9E1;--solar-dark:#C4440F;--green:#2D5016;
+  --green-light:#E8F0E1;--white:#FFFFFF;
+}
+html{scroll-snap-type:y mandatory;overflow-y:scroll}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink)}
+
+/* ─── PAGE WRAPPER ─── */
+.page{scroll-snap-align:start;min-height:100vh;display:flex;flex-direction:column;position:relative}
+
+/* ─── NAV ─── */
+nav{background:var(--paper);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;position:relative;z-index:100}
+.noi-logo{display:flex;align-items:center;gap:10px}
+.noi-icon-sm{width:32px;height:32px;background:var(--solar);border-radius:7px;display:flex;align-items:center;justify-content:center}
+.noi-icon-sm svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.noi-wordmark{font-family:'Fraunces',serif;font-size:20px;font-weight:300;color:var(--ink);letter-spacing:-.3px}
+.noi-wordmark span{color:var(--solar)}
+.nav-right{display:flex;align-items:center;gap:.6rem}
+.nav-cta{font-size:12px;padding:7px 18px;background:var(--solar);color:#fff;border:none;border-radius:20px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;letter-spacing:.2px;transition:background .15s}
+.nav-cta:hover{background:var(--solar-dark)}
+.nav-pdf{font-size:12px;padding:7px 14px;background:transparent;color:var(--ink-soft);border:1px solid var(--rule);border-radius:20px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:400;display:flex;align-items:center;gap:5px;transition:all .15s}
+.nav-pdf:hover{border-color:var(--solar);color:var(--solar)}
+.nav-pdf svg,.nav-pdf2 svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-pdf2{font-size:12px;padding:7px 14px;background:transparent;color:var(--ink-soft);border:1px solid var(--rule);border-radius:20px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:400;display:flex;align-items:center;gap:5px;transition:all .15s}
+.nav-pdf2:hover{border-color:var(--solar);color:var(--solar)}
+.back-btn{background:transparent;border:1px solid var(--rule);border-radius:20px;padding:6px 14px;font-size:12px;color:var(--ink-soft);cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:5px;transition:all .15s}
+.back-btn:hover{border-color:var(--solar);color:var(--solar)}
+.back-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ─── PAGE 1 HERO IMAGE ─── */
+.hero-img-wrap{position:relative;height:54vh;min-height:340px;overflow:hidden;flex-shrink:0}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 60%;display:block}
+.hero-img-grad{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,23,20,.08) 0%,rgba(26,23,20,.1) 40%,rgba(26,23,20,.72) 100%)}
+.hero-img-content{position:absolute;bottom:0;left:0;right:0;padding:2.5rem 3.5rem;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem}
+.hero-eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.75rem}
+.hero-headline{font-family:'Fraunces',serif;font-size:clamp(38px,4.5vw,60px);font-weight:200;color:#fff;line-height:1.08}
+.hero-headline em{color:var(--solar);font-style:italic}
+.hero-sub{font-size:13px;color:rgba(255,255,255,.7);line-height:1.65;max-width:320px;text-align:right}
+/* ─── STATS BAR ─── */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--paper);border-bottom:1px solid var(--rule)}
+.sb-item{padding:1.1rem 1.5rem;border-right:1px solid var(--rule);text-align:center}
+.sb-item:last-child{border-right:none}
+.sb-val{font-family:'Fraunces',serif;font-size:26px;font-weight:300;color:var(--ink);line-height:1;margin-bottom:3px}
+.sb-val.sol{color:var(--solar)}
+.sb-lbl{font-size:10px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.5px;line-height:1.4}
+
+/* ─── VALUE PROPS ─── */
+.vp-strip{display:grid;grid-template-columns:repeat(3,1fr);background:var(--paper);border-top:1px solid var(--rule)}
+.vp{padding:2rem 2.5rem;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:.6rem}
+.vp:last-child{border-right:none}
+.vp-icon{width:36px;height:36px;background:var(--solar-light);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:.25rem}
+.vp-icon svg{width:18px;height:18px;stroke:var(--solar);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vp-title{font-family:'Fraunces',serif;font-size:18px;font-weight:300;color:var(--ink)}
+.vp-body{font-size:13px;color:var(--ink-soft);line-height:1.6}
+
+/* ─── HOW IT WORKS ─── */
+.hiw{background:var(--card);padding:3rem 2.5rem;border-top:1px solid var(--rule)}
+.hiw-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-mute);margin-bottom:1.5rem}
+.hiw-steps{display:grid;grid-template-columns:repeat(5,1fr);align-items:start;gap:0}
+.hiw-step{padding:0 1rem;position:relative;text-align:center}
+.hiw-step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:14px;font-size:14px;color:var(--ink-mute)}
+.hiw-num{width:36px;height:36px;border-radius:50%;background:var(--solar);color:#fff;font-family:'Fraunces',serif;font-size:16px;font-weight:300;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem}
+.hiw-title{font-family:'Fraunces',serif;font-size:14px;font-weight:300;color:var(--ink);margin-bottom:.35rem}
+.hiw-desc{font-size:11px;color:var(--ink-soft);line-height:1.5}
+
+/* ─── SCROLL CTA ─── */
+.scroll-cta{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:1rem;background:var(--solar);cursor:pointer;font-size:13px;color:#fff;font-weight:500;letter-spacing:.3px;transition:background .15s;border:none;width:100%}
+.scroll-cta:hover{background:var(--solar-dark)}
+.scroll-cta svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ─── PAGE 2 ─── */
+.p2-topbar{background:var(--paper);padding:1.1rem 2.5rem;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between}
+.p2-title{font-family:'Fraunces',serif;font-size:20px;font-weight:300;color:var(--ink)}
+.p2-sub{font-size:12px;color:var(--ink-mute)}
+
+/* ─── CALC ─── */
+.calc-layout{display:grid;grid-template-columns:1fr 1fr}
+.calc-left{padding:2rem 2.5rem;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:1.5rem;background:var(--white)}
+.calc-right{padding:2rem 2.5rem;background:var(--green-light);display:flex;flex-direction:column;gap:1.25rem}
+.calc-head{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-mute)}
+
+/* ─── SLIDERS ─── */
+.sg{}
+.sg-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
+.sg-name{font-size:14px;font-weight:500;color:var(--ink)}
+.sg-val{font-family:'Fraunces',serif;font-size:22px;font-weight:300;color:var(--ink)}
+.sg-unit{font-size:13px;color:var(--ink-mute);font-family:'Inter',sans-serif}
+input[type=range]{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:var(--rule);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--green);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.2);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--green);border:2px solid #fff;cursor:pointer}
+.sg-range{display:flex;justify-content:space-between;margin-top:.3rem}
+.sg-range span{font-size:10px;color:var(--ink-mute)}
+.sg-range .note{font-size:10px;color:var(--solar);font-weight:500}
+.cdiv{border:none;border-top:1px solid var(--rule);margin:0}
+
+/* ─── UNIT SUMMARY ─── */
+.usumm{display:grid;grid-template-columns:repeat(3,1fr);background:var(--card);border-radius:10px;padding:.9rem}
+.us{text-align:center}
+.us-v{font-family:'Fraunces',serif;font-size:20px;font-weight:300;color:var(--ink);line-height:1;margin-bottom:3px}
+.us-v.sol{color:var(--solar)}
+.us-l{font-size:9px;color:var(--ink-mute);text-transform:uppercase;letter-spacing:.4px}
+.warn-box{background:#FFF3F0;border:1px solid #FFCCC0;border-radius:8px;padding:.6rem 1rem;font-size:12px;color:#C4440F;display:none}
+
+/* ─── RESULTS ─── */
+.res-big{font-family:'Fraunces',serif;font-size:clamp(42px,5vw,58px);font-weight:200;color:var(--green);line-height:1;transition:opacity .2s}
+.res-sub{font-size:12px;color:var(--ink-soft);margin-bottom:1rem}
+.rrow{display:flex;justify-content:space-between;align-items:baseline;padding:.5rem 0;border-bottom:1px solid rgba(45,80,22,.1)}
+.rrow:last-of-type{border-bottom:none}
+.rk{font-size:12px;color:var(--ink-soft)}
+.rv{font-size:13px;font-weight:500;color:var(--ink)}
+.rv.big{font-family:'Fraunces',serif;font-size:18px;font-weight:300;color:var(--green)}
+
+/* ─── SAVINGS / PROPVAL ─── */
+.sav{background:var(--ink);border-radius:8px;padding:.85rem 1rem;display:flex;align-items:center;gap:.75rem}
+.sav-ico{width:32px;height:32px;background:var(--solar);border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.sav-ico svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sav-v{font-family:'Fraunces',serif;font-size:20px;color:var(--solar);line-height:1;margin-bottom:2px}
+.sav-l{font-size:10px;color:var(--ink-mute);line-height:1.4}
+.pvc{background:var(--green);border-radius:8px;padding:1rem;text-align:center}
+.pvc-l{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5);margin-bottom:5px}
+.pvc-v{font-family:'Fraunces',serif;font-size:32px;font-weight:200;color:#fff;line-height:1;margin-bottom:3px}
+.pvc-s{font-size:10px;color:rgba(255,255,255,.5)}
+.cta-b{display:block;width:100%;padding:11px;background:var(--ink);color:#fff;border:none;border-radius:7px;font-size:13px;font-family:'Inter',sans-serif;font-weight:500;cursor:pointer;transition:background .15s}
+.cta-b:hover{background:#333}
+
+/* ─── CONTACT STRIP ─── */
+.contact-strip{
+  background:var(--ink);
+  display:grid;grid-template-columns:200px 1fr 260px;
+  min-height:120px;
+}
+.cs-qr{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.6rem;padding:1.25rem 1rem;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.cs-qr img{width:80px;height:80px;border-radius:6px;background:#fff;padding:4px}
+.cs-qr-lbl{font-size:10px;color:var(--ink-mute);text-align:center;letter-spacing:.5px;text-transform:uppercase;line-height:1.4}
+.cs-brand{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:1.25rem 2rem;gap:.5rem;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.cs-brand-logo{display:flex;align-items:center;gap:10px;margin-bottom:.25rem}
+.cs-brand-icon{width:36px;height:36px;background:var(--solar);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.cs-brand-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cs-brand-wm{font-family:'Fraunces',serif;font-size:24px;font-weight:300;color:#fff;letter-spacing:-.3px}
+.cs-brand-wm span{color:var(--solar)}
+.cs-tagline{font-size:12px;color:var(--ink-mute);text-align:center;line-height:1.6}
+.cs-pillrow{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:.25rem}
+.cs-pill{font-size:9px;padding:3px 9px;border-radius:12px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.45)}
+.cs-rep{
+  display:flex;align-items:center;gap:1rem;
+  padding:1.25rem 1.5rem;
+}
+.rep-photo{
+  width:68px;height:68px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:2px solid rgba(255,255,255,.15);
+}
+.rep-photo img{width:100%;height:100%;object-fit:cover}
+.rep-avatar{
+  width:68px;height:68px;border-radius:50%;flex-shrink:0;
+  background:var(--solar);display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:24px;font-weight:300;color:#fff;
+  border:2px solid rgba(255,255,255,.15);
+}
+.rep-info{display:flex;flex-direction:column;gap:.3rem}
+.rep-name{font-family:'Fraunces',serif;font-size:17px;font-weight:300;color:#fff;line-height:1}
+.rep-title{font-size:11px;color:var(--solar);font-weight:500;letter-spacing:.3px;text-transform:uppercase}
+.rep-detail{font-size:12px;color:var(--ink-mute);display:flex;align-items:center;gap:5px}
+.rep-detail svg{width:12px;height:12px;stroke:var(--ink-mute);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* ─── PRINT / PDF ─── */
+@media print{
+  html{scroll-snap-type:none;overflow:visible}
+  body{background:#fff}
+  .page{scroll-snap-align:none;min-height:auto;page-break-after:always}
+  nav,.scroll-cta,.back-btn,.nav-pdf,.nav-pdf2,.cta-b{display:none!important}
+  .hero-img-wrap{height:44vh;min-height:260px}
+  .stats-bar{grid-template-columns:repeat(4,1fr)}
+  .calc-layout{grid-template-columns:1fr 1fr}
+  .contact-strip{grid-template-columns:160px 1fr 220px}
+  @page{size:A4 landscape;margin:0}
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .hero-img-content{flex-direction:column;align-items:flex-start;padding:2rem}
+  .hero-sub{text-align:left}
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .calc-layout{grid-template-columns:1fr}
+  .hiw-steps{grid-template-columns:1fr 1fr;gap:1rem}
+  .hiw-step::after{display:none}
+  .vp-strip{grid-template-columns:1fr}
+  .contact-strip{grid-template-columns:1fr}
+  .cs-qr,.cs-brand{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     PAGE 1 — THE PITCH
+════════════════════════════════ -->
+<div class="page" id="page1">
+  <nav>
+    <div class="noi-logo">
+      <div class="noi-icon-sm">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+      </div>
+      <div class="noi-wordmark">NOI<span>.</span></div>
+    </div>
+    <div class="nav-right">
+      <button class="nav-pdf" onclick="downloadPDF()">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
+      <button class="nav-cta" onclick="goToCalc()">Calculate my NOI →</button>
+    </div>
+  </nav>
+
+  <!-- FULL-WIDTH HERO IMAGE -->
+  <div class="hero-img-wrap">
+    <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=1600&q=85&fit=crop&crop=bottom" alt="Modern apartment building with rooftop solar panels at golden hour" loading="eager">
+    <div class="hero-img-grad"></div>
+    <div class="hero-img-content">
+      <div>
+        <div class="hero-eyebrow">Solar income for property owners</div>
+        <h1 class="hero-headline">Your rooftops are<br>sitting on <em>real money.</em></h1>
+      </div>
+      <p class="hero-sub">NOI installs solar on every rooftop, bills your tenants below their utility rate, and sends you a check — every month, for 20 years, with zero dollars invested.</p>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="sb-item"><div class="sb-val sol">$0</div><div class="sb-lbl">Capital required</div></div>
+    <div class="sb-item"><div class="sb-val">20 yr</div><div class="sb-lbl">Revenue term</div></div>
+    <div class="sb-item"><div class="sb-val sol">40%</div><div class="sb-lbl">ITC passed to you</div></div>
+    <div class="sb-item"><div class="sb-val">5%</div><div class="sb-lbl">Platform fee only</div></div>
+  </div>
+
+  <!-- VALUE PROPS — 4 columns -->
+  <div class="vp-strip" style="grid-template-columns:repeat(4,1fr)">
+    <div class="vp">
+      <div class="vp-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="vp-title">Full-service installation</div>
+      <div class="vp-body">NOI handles everything — design, permits, licensed crews, commissioning, and utility interconnection. You sign once. We do the rest.</div>
+    </div>
+    <div class="vp">
+      <div class="vp-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+      </div>
+      <div class="vp-title">Tier 1 Bloomberg manufacturers</div>
+      <div class="vp-body">We use only US-focused, Bloomberg Tier 1–rated solar panels — the highest quality standard in the industry, required for your 40% Investment Tax Credit (ITC) eligibility.</div>
+    </div>
+    <div class="vp">
+      <div class="vp-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="vp-title">Tenants save every month</div>
+      <div class="vp-body">You charge tenants 15–25% below their utility bill. They save money, you earn the spread. Solar becomes the easiest lease addendum they'll ever sign.</div>
+    </div>
+    <div class="vp">
+      <div class="vp-icon">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <div class="vp-title">You collect the spread</div>
+      <div class="vp-body">The difference between your tenant charge and NOI's lease cost is yours — less 5% platform fee. We bill, collect, and remit revenue every month.</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="hiw">
+    <div class="hiw-label">How it works — from handshake to monthly check</div>
+    <div class="hiw-steps">
+      <div class="hiw-step">
+        <div class="hiw-num">1</div>
+        <div class="hiw-title">Agreement</div>
+        <div class="hiw-desc">Partner agreement signed. NOI structures 8.99% capital lease — $0 from you.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">2</div>
+        <div class="hiw-title">Design &amp; permits</div>
+        <div class="hiw-desc">Aerial survey of every rooftop. Structural analysis. All permits filed by our team.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">3</div>
+        <div class="hiw-title">Tenant prep</div>
+        <div class="hiw-desc">NOI drafts notifications and solar addendum. You review and distribute.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">4</div>
+        <div class="hiw-title">Installation</div>
+        <div class="hiw-desc">Our licensed, bonded crews install Bloomberg Tier 1 panels on every home.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">5</div>
+        <div class="hiw-title">Monthly revenue</div>
+        <div class="hiw-desc">Billing launches. NOI collects from tenants. You receive your check.</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="scroll-cta" onclick="goToCalc()">
+    Calculate your NOI uplift — adjust for your portfolio
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
+</div>
+
+<!-- ════════════════════════════════
+     PAGE 2 — CALCULATOR + CONTACT
+════════════════════════════════ -->
+<div class="page" id="page2">
+
+  <div class="p2-topbar">
+    <div style="display:flex;align-items:center;gap:1rem">
+      <button class="back-btn" onclick="goToP1()">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Back
+      </button>
+      <div>
+        <div class="p2-title">NOI Uplift Calculator</div>
+        <div class="p2-sub">Adjust the sliders to model your specific portfolio</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <button class="nav-pdf2" onclick="downloadPDF()">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
+      <div class="noi-logo">
+        <div class="noi-icon-sm">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+        </div>
+        <div class="noi-wordmark">NOI<span>.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calculator -->
+  <div class="calc-layout">
+    <div class="calc-left">
+      <div class="calc-head">Adjust to match your property</div>
+
+      <div class="sg">
+        <div class="sg-top">
+          <span class="sg-name">Number of units</span>
+          <span class="sg-val" id="lbl-units">118</span>
+        </div>
+        <input type="range" id="sl-units" min="1" max="500" value="118" step="1" oninput="recalc()">
+        <div class="sg-range"><span>1</span><span>500</span></div>
+      </div>
+
+      <hr class="cdiv">
+
+      <div class="sg">
+        <div class="sg-top">
+          <span class="sg-name">Avg utility bill / unit</span>
+          <span class="sg-val" id="lbl-bill">$174 <span class="sg-unit">/ mo</span></span>
+        </div>
+        <input type="range" id="sl-bill" min="80" max="350" value="174" step="1" oninput="recalc()">
+        <div class="sg-range"><span>$80</span><span class="note">Grid ref.</span><span>$350</span></div>
+      </div>
+
+      <hr class="cdiv">
+
+      <div class="sg">
+        <div class="sg-top">
+          <span class="sg-name">Your discount off utility bill</span>
+          <span class="sg-val" id="lbl-disc">20 <span class="sg-unit">%</span></span>
+        </div>
+        <input type="range" id="sl-disc" min="5" max="40" value="20" step="1" oninput="recalc()">
+        <div class="sg-range"><span>5%</span><span class="note">Sweet spot 15–25%</span><span>40%</span></div>
+      </div>
+
+      <div class="usumm">
+        <div class="us"><div class="us-v" id="su-tc">$139</div><div class="us-l">Tenant pays / mo</div></div>
+        <div class="us"><div class="us-v sol" id="su-nu">$28.69</div><div class="us-l">Net to you / unit</div></div>
+        <div class="us"><div class="us-v" id="su-sv">$35</div><div class="us-l">Tenant saves / mo</div></div>
+      </div>
+
+      <div class="warn-box" id="warn-box">⚠ Thin margin — recommend keeping tenant charge at least $20 above the NOI lease cost ($109/mo).</div>
+
+      <div style="background:var(--card);border-radius:8px;padding:.85rem 1rem;font-size:12px;color:var(--ink-soft);line-height:1.7">
+        <strong style="color:var(--ink)">NOI lease cost (fixed): $109/home/month</strong><br>
+        8.99% capital lease · 20-year term · 40% ITC passed to you<br>
+        Effective rate: 13.70¢/kWh — cheaper than grid<br>
+        <span style="color:var(--solar);font-weight:500">★ Bloomberg Tier 1 panels · US-focused manufacturers · NOI handles full installation, contracting &amp; billing</span>
+      </div>
+    </div>
+
+    <div class="calc-right">
+      <div class="calc-head">Your NOI uplift</div>
+      <div class="res-big" id="res-annual">$40,625</div>
+      <div class="res-sub">Net annual revenue, after platform fee</div>
+
+      <div>
+        <div class="rrow"><span class="rk">Tenant charge / unit</span><span class="rv" id="r-tenant">$139.20 / mo</span></div>
+        <div class="rrow"><span class="rk">NOI lease cost (you pay)</span><span class="rv">$109.00 / mo</span></div>
+        <div class="rrow"><span class="rk">Gross spread / unit</span><span class="rv" id="r-spread">$30.20 / mo</span></div>
+        <div class="rrow"><span class="rk">NOI platform fee (5%)</span><span class="rv" id="r-fee" style="color:var(--ink-mute)">−$1.51 / mo</span></div>
+        <div class="rrow" style="border-bottom:2px solid rgba(45,80,22,.2)"><span class="rk" style="font-weight:600;color:var(--ink)">Net / unit / month</span><span class="rv big" id="r-net">$28.69</span></div>
+        <div class="rrow"><span class="rk">Property monthly revenue</span><span class="rv" id="r-monthly">$3,385</span></div>
+        <div class="rrow"><span class="rk">Property annual revenue</span><span class="rv" id="r-annual-row">$40,625</span></div>
+        <div class="rrow"><span class="rk">NOI platform fee (annual)</span><span class="rv" id="r-fee-annual" style="color:var(--ink-mute)">−$2,139</span></div>
+        <div class="rrow"><span class="rk" style="font-weight:600;color:var(--ink)">Annual NOI uplift</span><span class="rv big" id="r-uplift">$40,625</span></div>
+      </div>
+
+      <div class="sav">
+        <div class="sav-ico">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div class="sav-v" id="sb-val">$34.80 / month</div>
+          <div class="sav-l">each tenant saves vs. their utility bill — the easiest lease addendum they'll ever sign</div>
+        </div>
+      </div>
+
+      <div class="pvc">
+        <div class="pvc-l">Property value added @ 6% cap rate · Solar Phase 1</div>
+        <div class="pvc-v" id="pvc-val">+$677,083</div>
+        <div class="pvc-s">Add battery storage &amp; EV charging for additional uplift</div>
+      </div>
+
+      <button class="cta-b" id="cta-contact-btn">Get your custom rooftop model → joinnoi.com</button>
+    </div>
+  </div>
+
+  <!-- ── CONTACT STRIP ── -->
+  <div class="contact-strip">
+
+    <!-- QR Code -->
+    <div class="cs-qr">
+      <img id="qr-img" src="" alt="QR code to joinnoi.com">
+      <div class="cs-qr-lbl">Scan to<br>visit joinnoi.com</div>
+    </div>
+
+    <!-- Brand center -->
+    <div class="cs-brand">
+      <div class="cs-brand-logo">
+        <div class="cs-brand-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></svg>
+        </div>
+        <div class="cs-brand-wm">NOI<span>.</span></div>
+      </div>
+      <div class="cs-tagline">Solar income for property owners.<br>Finance · Install · Bill · Collect</div>
+      <div style="display:flex;flex-direction:column;gap:.25rem;margin:.2rem 0;width:100%;align-items:center">
+        <div style="font-size:11px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:5px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span style="color:var(--solar)">joinnoi.com</span>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:5px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hello@joinnoi.com
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:5px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          my.joinnoi.com — Client portal
+        </div>
+      </div>
+      <div class="cs-pillrow">
+        <span class="cs-pill">$0 out of pocket</span>
+        <span class="cs-pill">8.99% capital lease</span>
+        <span class="cs-pill">5% platform fee</span>
+        <span class="cs-pill">20-year term</span>
+      </div>
+    </div>
+
+    <!-- Rep contact -->
+    <div class="cs-rep">
+      <div id="rep-avatar-wrap"></div>
+      <div class="rep-info">
+        <div class="rep-name" id="rep-name">Your Name</div>
+        <div class="rep-title" id="rep-title">Solar Growth Consultant</div>
+        <div class="rep-detail" id="rep-email-el">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span id="rep-email">your@joinnoi.com</span>
+        </div>
+        <div class="rep-detail" id="rep-phone-el">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span id="rep-phone">(555) 000-0000</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- html2pdf library for download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+/* ── URL PARAMS ── */
+function param(key, fallback){
+  var v = new URLSearchParams(window.location.search).get(key);
+  return v ? decodeURIComponent(v) : fallback;
+}
+
+var REP_NAME  = param('name',  'Your Name');
+var REP_TITLE = param('title', 'Solar Growth Consultant');
+var REP_PHONE = param('phone', '(555) 000-0000');
+var REP_EMAIL = param('email', 'your@joinnoi.com');
+var REP_PHOTO = param('photo', '');
+var QR_URL    = param('qr',    'https://joinnoi.com');
+
+/* ── POPULATE CONTACT BLOCK ── */
+function initContact(){
+  document.getElementById('rep-name').textContent  = REP_NAME;
+  document.getElementById('rep-title').textContent = REP_TITLE;
+  document.getElementById('rep-phone').textContent = REP_PHONE;
+  document.getElementById('rep-email').textContent = REP_EMAIL;
+
+  // Avatar
+  var wrap = document.getElementById('rep-avatar-wrap');
+  if(REP_PHOTO){
+    wrap.innerHTML = '<div class="rep-photo"><img src="'+REP_PHOTO+'" alt="'+REP_NAME+'"></div>';
+  } else {
+    var initials = REP_NAME.split(' ').map(function(w){return w[0]||''}).join('').toUpperCase().slice(0,2);
+    wrap.innerHTML = '<div class="rep-avatar">'+initials+'</div>';
+  }
+
+  // QR code
+  var qrSrc = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data='+encodeURIComponent(QR_URL)+'&color=F4EFE6&bgcolor=1A1714&format=svg&qzone=1';
+  document.getElementById('qr-img').src = qrSrc;
+
+  // CTA button mailto
+  document.getElementById('cta-contact-btn').onclick = function(){
+    window.open('mailto:'+REP_EMAIL+'?subject=NOI Solar Program Inquiry', '_blank');
+  };
+}
+
+/* ── CALCULATOR ── */
+var NOI_LEASE = 109;
+
+function fmt$(n){
+  if(Math.abs(n) >= 1000000) return '$'+(n/1000000).toFixed(2)+'M';
+  return '$'+Math.round(Math.abs(n)).toLocaleString('en-US');
+}
+function fd(n,d){ return '$'+Math.abs(n).toFixed(d); }
+
+function recalc(){
+  var units = +document.getElementById('sl-units').value;
+  var bill  = +document.getElementById('sl-bill').value;
+  var disc  = +document.getElementById('sl-disc').value;
+
+  document.getElementById('lbl-units').textContent = units;
+  document.getElementById('lbl-bill').innerHTML = '$'+bill+' <span class="sg-unit">/ mo</span>';
+  document.getElementById('lbl-disc').innerHTML = disc+' <span class="sg-unit">%</span>';
+
+  var tc  = bill * (1 - disc/100);
+  var sv  = bill - tc;
+  var sp  = tc - NOI_LEASE;
+  var fee = Math.max(sp * 0.05, 0);
+  var net = Math.max(sp - fee, 0);
+  var mo  = net * units;
+  var an  = mo * 12;
+  var pv  = an / 0.06;
+
+  document.getElementById('warn-box').style.display = (sp < 15) ? 'block' : 'none';
+
+  document.getElementById('su-tc').textContent = '$'+Math.round(tc);
+  document.getElementById('su-nu').textContent = net > 0 ? fd(net,2) : '$0';
+  document.getElementById('su-sv').textContent = '$'+Math.round(sv);
+
+  document.getElementById('res-annual').textContent = an > 0 ? fmt$(an) : '$0';
+  document.getElementById('r-tenant').textContent   = fd(tc,2)+' / mo';
+  document.getElementById('r-spread').textContent   = fd(Math.max(sp,0),2)+' / mo';
+  document.getElementById('r-fee').textContent      = '−'+fd(fee,2)+' / mo';
+  document.getElementById('r-net').textContent      = fd(Math.max(net,0),2);
+  document.getElementById('r-monthly').textContent  = mo > 0 ? fmt$(mo) : '$0';
+  document.getElementById('r-annual-row').textContent = an > 0 ? fmt$(an) : '$0';
+  document.getElementById('r-fee-annual').textContent = '−'+fmt$(fee*units*12);
+  document.getElementById('r-uplift').textContent   = an > 0 ? fmt$(an) : '$0';
+  document.getElementById('sb-val').textContent     = fd(sv,2)+' / month';
+  document.getElementById('pvc-val').textContent    = pv > 0 ? '+'+fmt$(pv) : '$0';
+}
+
+/* ── NAVIGATION ── */
+function goToCalc(){ document.getElementById('page2').scrollIntoView({behavior:'smooth'}) }
+function goToP1(){   document.getElementById('page1').scrollIntoView({behavior:'smooth'}) }
+
+/* ── PDF DOWNLOAD ── */
+function downloadPDF(){
+  var repSlug = REP_NAME.replace(/[^a-z0-9]/gi,'_');
+  var opt = {
+    margin: 0,
+    filename: 'NOI_Solar_Pitch_'+repSlug+'.pdf',
+    image: { type:'jpeg', quality:.95 },
+    html2canvas: { scale:2, useCORS:true, letterRendering:true },
+    jsPDF: { unit:'mm', format:'a4', orientation:'landscape' },
+    pagebreak: { mode:['css','legacy'], before:'#page2' }
+  };
+  // Temporarily disable scroll-snap for capture
+  document.documentElement.style.scrollSnapType = 'none';
+  document.getElementById('page1').style.pageBreakAfter = 'always';
+  html2pdf().set(opt).from(document.body).save().then(function(){
+    document.documentElement.style.scrollSnapType = '';
+  });
+}
+
+/* ── INIT ── */
+initContact();
+recalc();
+</script>
+</body>
+</html>
