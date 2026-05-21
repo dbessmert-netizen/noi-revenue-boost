@@ -15,6 +15,7 @@ import { Route as KiplingMeadowsRouteImport } from './routes/kipling-meadows'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EconomicsRouteImport } from './routes/economics'
 import { Route as DanielBessmertRouteImport } from './routes/daniel-bessmert'
+import { Route as DanKatzmanRouteImport } from './routes/dan-katzman'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as IndexRouteImport } from './routes/index'
@@ -49,6 +50,11 @@ const DanielBessmertRoute = DanielBessmertRouteImport.update({
   path: '/daniel-bessmert',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DanKatzmanRoute = DanKatzmanRouteImport.update({
+  id: '/dan-katzman',
+  path: '/dan-katzman',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
+  '/dan-katzman': typeof DanKatzmanRoute
   '/daniel-bessmert': typeof DanielBessmertRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
+  '/dan-katzman': typeof DanKatzmanRoute
   '/daniel-bessmert': typeof DanielBessmertRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
+  '/dan-katzman': typeof DanKatzmanRoute
   '/daniel-bessmert': typeof DanielBessmertRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/compare'
     | '/contact'
+    | '/dan-katzman'
     | '/daniel-bessmert'
     | '/economics'
     | '/faq'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/'
     | '/compare'
     | '/contact'
+    | '/dan-katzman'
     | '/daniel-bessmert'
     | '/economics'
     | '/faq'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/'
     | '/compare'
     | '/contact'
+    | '/dan-katzman'
     | '/daniel-bessmert'
     | '/economics'
     | '/faq'
@@ -139,6 +151,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompareRoute: typeof CompareRoute
   ContactRoute: typeof ContactRoute
+  DanKatzmanRoute: typeof DanKatzmanRoute
   DanielBessmertRoute: typeof DanielBessmertRoute
   EconomicsRoute: typeof EconomicsRoute
   FaqRoute: typeof FaqRoute
@@ -191,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DanielBessmertRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dan-katzman': {
+      id: '/dan-katzman'
+      path: '/dan-katzman'
+      fullPath: '/dan-katzman'
+      preLoaderRoute: typeof DanKatzmanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -219,6 +239,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompareRoute: CompareRoute,
   ContactRoute: ContactRoute,
+  DanKatzmanRoute: DanKatzmanRoute,
   DanielBessmertRoute: DanielBessmertRoute,
   EconomicsRoute: EconomicsRoute,
   FaqRoute: FaqRoute,
