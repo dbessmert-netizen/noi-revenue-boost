@@ -15,21 +15,21 @@ const PEOPLE: Record<string, Person> = {
     title: "Founder & CEO",
     phone: "(561) 800-0550",
     email: "daniel@joinnoi.com",
-    photo: "https://joinnoi.com/daniel-bessmert.jpg",
+    photo: "/daniel-bessmert.jpg",
   },
   "dan-katzman": {
     name: "Dan Katzman",
     title: "CEO & Founder",
     phone: "(917) 748-5280",
     email: "dan@joinnoi.com",
-    photo: "https://joinnoi.com/dan-katzman.jpg",
+    photo: "/dan-katzman.jpg",
   },
   "margo-ivanenko": {
     name: "Margo Ivanenko",
     title: "Partnerships · All States",
     phone: "(732) 558-6555",
     email: "margo@joinnoi.com",
-    photo: "https://joinnoi.com/margo-ivanenko.jpg",
+    photo: "/margo-ivanenko.jpg",
   },
 };
 
