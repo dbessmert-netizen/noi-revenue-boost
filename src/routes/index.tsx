@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { NoiCalculator } from "@/components/site/NoiCalculator";
+import { ProductWalkthrough } from "@/components/site/ProductWalkthrough";
 import { seo, productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import heroRooftop from "@/assets/hero-rooftop.jpg";
 
@@ -115,6 +116,9 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Animated product walkthrough */}
+      <ProductWalkthrough />
 
       {/* Mechanism / How it works */}
       <section className="mx-auto max-w-6xl px-6 py-24">
