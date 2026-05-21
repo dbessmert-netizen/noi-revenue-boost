@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { NoiCalculator } from "@/components/site/NoiCalculator";
+import { ProductWalkthrough } from "@/components/site/ProductWalkthrough";
 import { seo, productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import heroRooftop from "@/assets/hero-rooftop.jpg";
 
