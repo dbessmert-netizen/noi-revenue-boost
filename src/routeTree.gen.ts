@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as KiplingMeadowsRouteImport } from './routes/kipling-meadows'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EconomicsRouteImport } from './routes/economics'
@@ -35,6 +36,11 @@ const ProcessRoute = ProcessRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KiplingMeadowsRoute = KiplingMeadowsRouteImport.update({
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling-meadows': typeof KiplingMeadowsRoute
+  '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/team': typeof TeamRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByTo {
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling-meadows': typeof KiplingMeadowsRoute
+  '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/team': typeof TeamRoute
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling-meadows': typeof KiplingMeadowsRoute
+  '/partners': typeof PartnersRoute
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/team': typeof TeamRoute
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
     | '/economics'
     | '/faq'
     | '/kipling-meadows'
+    | '/partners'
     | '/pricing'
     | '/process'
     | '/team'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/economics'
     | '/faq'
     | '/kipling-meadows'
+    | '/partners'
     | '/pricing'
     | '/process'
     | '/team'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/economics'
     | '/faq'
     | '/kipling-meadows'
+    | '/partners'
     | '/pricing'
     | '/process'
     | '/team'
@@ -179,6 +191,7 @@ export interface RootRouteChildren {
   EconomicsRoute: typeof EconomicsRoute
   FaqRoute: typeof FaqRoute
   KiplingMeadowsRoute: typeof KiplingMeadowsRoute
+  PartnersRoute: typeof PartnersRoute
   PricingRoute: typeof PricingRoute
   ProcessRoute: typeof ProcessRoute
   TeamRoute: typeof TeamRoute
@@ -207,6 +220,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kipling-meadows': {
@@ -283,6 +303,7 @@ const rootRouteChildren: RootRouteChildren = {
   EconomicsRoute: EconomicsRoute,
   FaqRoute: FaqRoute,
   KiplingMeadowsRoute: KiplingMeadowsRoute,
+  PartnersRoute: PartnersRoute,
   PricingRoute: PricingRoute,
   ProcessRoute: ProcessRoute,
   TeamRoute: TeamRoute,
@@ -292,3 +313,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
