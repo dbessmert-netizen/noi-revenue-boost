@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 const nav = [
+  { to: "/partners", label: "Partners" },
   { to: "/economics", label: "Economics" },
   { to: "/compare", label: "Compare" },
   { to: "/process", label: "Process" },
@@ -9,6 +10,7 @@ const nav = [
   { to: "/blog", label: "Blog" },
   { to: "/faq", label: "FAQ" },
 ] as const;
+
 
 
 export function Header() {
