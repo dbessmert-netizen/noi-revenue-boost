@@ -6,8 +6,10 @@ const nav = [
   { to: "/process", label: "Process" },
   { to: "/pricing", label: "Pricing" },
   { to: "/team", label: "Team" },
+  { to: "/blog", label: "Blog" },
   { to: "/faq", label: "FAQ" },
 ] as const;
+
 
 export function Header() {
   return (

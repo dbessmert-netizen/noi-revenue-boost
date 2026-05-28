@@ -31,6 +31,7 @@ export function Footer() {
             <div className="eyebrow">Company</div>
             <ul className="mt-4 space-y-2 text-sm">
               <li><Link to="/team" className="hover:text-foreground text-[color:var(--ink-soft)]">Team</Link></li>
+              <li><Link to="/blog" className="hover:text-foreground text-[color:var(--ink-soft)]">Blog</Link></li>
               <li><Link to="/faq" className="hover:text-foreground text-[color:var(--ink-soft)]">FAQ</Link></li>
               <li><Link to="/contact" className="hover:text-foreground text-[color:var(--ink-soft)]">Contact us</Link></li>
             </ul>
