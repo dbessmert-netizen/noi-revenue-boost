@@ -42,7 +42,7 @@ function HomePage() {
       <section className="relative overflow-hidden">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-16 pt-16 md:grid-cols-2 md:pt-24">
           <div>
-            <div className="eyebrow">The NOI growth platform</div>
+            <div className="eyebrow">NOI (Net Operating Income) Growth Platform</div>
             <h1 className="font-display mt-5 text-5xl font-medium leading-[1.02] tracking-tight md:text-6xl">
               Your roof is a<br />
               <span className="italic text-[color:var(--solar)]">revenue line.</span>

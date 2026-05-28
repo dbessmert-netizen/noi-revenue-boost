@@ -10,7 +10,7 @@ export function Footer() {
               NOI<span className="text-[color:var(--solar)]">.</span>
             </div>
             <p className="mt-3 max-w-sm text-sm text-[color:var(--ink-soft)]">
-              The NOI growth platform for landlords. Own your roof. Own the revenue.
+              NOI (Net Operating Income) Growth Platform for landlords. Own your roof. Own the revenue.
             </p>
             <address className="mt-6 not-italic text-xs leading-relaxed text-[color:var(--ink-mute)]">
               <div className="font-medium text-[color:var(--ink-soft)]">Great Week LLC</div>
