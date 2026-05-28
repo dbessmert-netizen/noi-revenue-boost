@@ -17,8 +17,10 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EconomicsRouteImport } from './routes/economics'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompareRouteImport } from './routes/compare'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeamSlugRouteImport } from './routes/team_.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
@@ -60,6 +62,11 @@ const CompareRoute = CompareRouteImport.update({
   path: '/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -70,9 +77,15 @@ const TeamSlugRoute = TeamSlugRouteImport.update({
   path: '/team/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog_/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
@@ -81,10 +94,12 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/team': typeof TeamRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/team/$slug': typeof TeamSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
@@ -93,11 +108,13 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/team': typeof TeamRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/team/$slug': typeof TeamSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
@@ -106,12 +123,14 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/process': typeof ProcessRoute
   '/team': typeof TeamRoute
+  '/blog_/$slug': typeof BlogSlugRoute
   '/team_/$slug': typeof TeamSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/blog'
     | '/compare'
     | '/contact'
     | '/economics'
@@ -120,10 +139,12 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/process'
     | '/team'
+    | '/blog/$slug'
     | '/team/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/blog'
     | '/compare'
     | '/contact'
     | '/economics'
@@ -132,10 +153,12 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/process'
     | '/team'
+    | '/blog/$slug'
     | '/team/$slug'
   id:
     | '__root__'
     | '/'
+    | '/blog'
     | '/compare'
     | '/contact'
     | '/economics'
@@ -144,11 +167,13 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/process'
     | '/team'
+    | '/blog_/$slug'
     | '/team_/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRoute
   CompareRoute: typeof CompareRoute
   ContactRoute: typeof ContactRoute
   EconomicsRoute: typeof EconomicsRoute
@@ -157,6 +182,7 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   ProcessRoute: typeof ProcessRoute
   TeamRoute: typeof TeamRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   TeamSlugRoute: typeof TeamSlugRoute
 }
 
@@ -218,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -232,11 +265,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeamSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog_/$slug': {
+      id: '/blog_/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRoute,
   CompareRoute: CompareRoute,
   ContactRoute: ContactRoute,
   EconomicsRoute: EconomicsRoute,
@@ -245,8 +286,18 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   ProcessRoute: ProcessRoute,
   TeamRoute: TeamRoute,
+  BlogSlugRoute: BlogSlugRoute,
   TeamSlugRoute: TeamSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

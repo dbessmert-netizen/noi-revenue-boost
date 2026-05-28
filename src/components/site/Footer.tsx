@@ -33,13 +33,16 @@ export function Footer() {
               <li><Link to="/team" className="hover:text-foreground text-[color:var(--ink-soft)]">Team</Link></li>
               <li><Link to="/faq" className="hover:text-foreground text-[color:var(--ink-soft)]">FAQ</Link></li>
               <li><Link to="/contact" className="hover:text-foreground text-[color:var(--ink-soft)]">Contact us</Link></li>
+          <div>
+            <div className="eyebrow">Company</div>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li><Link to="/team" className="hover:text-foreground text-[color:var(--ink-soft)]">Team</Link></li>
+              <li><Link to="/blog" className="hover:text-foreground text-[color:var(--ink-soft)]">Blog</Link></li>
+              <li><Link to="/faq" className="hover:text-foreground text-[color:var(--ink-soft)]">FAQ</Link></li>
+              <li><Link to="/contact" className="hover:text-foreground text-[color:var(--ink-soft)]">Contact us</Link></li>
             </ul>
           </div>
-        </div>
-        <div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-[color:var(--ink-mute)] md:flex-row md:justify-between">
-          <span>© {new Date().getFullYear()} NOI. All rights reserved.</span>
-          <span className="flex flex-wrap gap-x-4 gap-y-1">
-            <Link to="/" className="hover:text-foreground">joinnoi.com</Link>
+
             <a href="mailto:hello@joinnoi.com" className="hover:text-foreground">hello@joinnoi.com</a>
           </span>
         </div>
