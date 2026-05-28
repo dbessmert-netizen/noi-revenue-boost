@@ -143,3 +143,81 @@
     text-transform: uppercase;
   }
 }
+
+@layer components {
+  .prose-noi {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+  .prose-noi h2 {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose-noi h3 {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    color: var(--ink);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.015em;
+  }
+  .prose-noi p { margin: 1rem 0; }
+  .prose-noi a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--solar) 50%, transparent);
+    text-underline-offset: 4px;
+  }
+  .prose-noi a:hover { color: var(--solar); }
+  .prose-noi strong { color: var(--ink); font-weight: 600; }
+  .prose-noi em { font-style: italic; }
+  .prose-noi ul, .prose-noi ol { margin: 1rem 0; padding-left: 1.5rem; }
+  .prose-noi ul { list-style: disc; }
+  .prose-noi ol { list-style: decimal; }
+  .prose-noi li { margin: 0.4rem 0; }
+  .prose-noi li::marker { color: var(--solar); }
+  .prose-noi blockquote {
+    border-left: 3px solid var(--solar);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .prose-noi code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--paper-deep);
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+  }
+  .prose-noi pre {
+    background: var(--paper-deep);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1.25rem 0;
+  }
+  .prose-noi pre code { background: transparent; padding: 0; }
+  .prose-noi hr { border-color: var(--border); margin: 2rem 0; }
+  .prose-noi table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+  }
+  .prose-noi th, .prose-noi td {
+    border-bottom: 1px solid var(--border);
+    padding: 0.65rem 0.75rem;
+    text-align: left;
+  }
+  .prose-noi th { color: var(--ink); font-weight: 600; background: var(--paper-deep); }
+  .prose-noi h2:first-child, .prose-noi h3:first-child { margin-top: 0; }
+}
+
