@@ -6,9 +6,9 @@ export const Route = createFileRoute("/process")({
   head: () =>
     seo({
       path: "/process",
-      title: "How NOI Works — From Utility Bill to Monthly Payout in 60 Days",
+      title: "How NOI Works — Utility Bill to Payout in 60 Days",
       description:
-        "Four steps: assess, install, enroll tenants, collect monthly payouts. NOI handles permitting, install, billing, and Stripe payouts for landlords, developers, and HOAs across the US.",
+        "Four steps: assess, install, enroll tenants, collect monthly payouts. NOI handles permits, install, billing & Stripe payouts across the US.",
       keywords: [
         "how solar billing works landlord",
         "tenant solar onboarding",

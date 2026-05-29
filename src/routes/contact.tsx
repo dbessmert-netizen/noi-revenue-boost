@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { SiteLayout } from "@/components/site/Layout";
 import { submitContact } from "@/server/contact.functions";
 import { seo } from "@/lib/seo";
@@ -107,10 +107,11 @@ function ContactPage() {
               <input type="hidden" name="source" value="contact_page" />
             </div>
             <div>
-              <label className="mb-2 block text-sm font-medium">
+              <label htmlFor="contact-message" className="mb-2 block text-sm font-medium">
                 What are you hoping to figure out?
               </label>
               <textarea
+                id="contact-message"
                 name="message"
                 rows={4}
                 maxLength={2000}
@@ -164,13 +165,15 @@ function Field({
   min?: number;
   max?: number;
 }) {
+  const id = useId();
   return (
     <div>
-      <label className="mb-2 block text-sm font-medium">
+      <label htmlFor={id} className="mb-2 block text-sm font-medium">
         {label}
         {required && <span className="ml-0.5 text-destructive">*</span>}
       </label>
       <input
+        id={id}
         name={name}
         type={type}
         required={required}

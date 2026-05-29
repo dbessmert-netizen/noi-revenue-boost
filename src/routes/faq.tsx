@@ -92,7 +92,7 @@ function FaqPage() {
 
         {groups.map((g) => (
           <div key={g.title} className="mt-14">
-            <div className="eyebrow">{g.title}</div>
+            <h2 className="eyebrow">{g.title}</h2>
             <div className="mt-6 divide-y divide-border border-y border-border">
               {g.faqs.map((f) => (
                 <details key={f.q} className="group py-6">

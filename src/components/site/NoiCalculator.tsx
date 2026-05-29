@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 const fmt = (n: number) =>
@@ -10,15 +10,17 @@ function Slider({
   label: string; value: number; min: number; max: number; step: number;
   onChange: (v: number) => void; suffix: string;
 }) {
+  const id = useId();
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <label className="text-sm font-medium">{label}</label>
+        <label htmlFor={id} className="text-sm font-medium">{label}</label>
         <span className="font-mono pb-num text-sm text-[color:var(--ink-soft)]">
           {value}{suffix}
         </span>
       </div>
       <input
+        id={id}
         type="range"
         min={min}
         max={max}
@@ -39,7 +41,8 @@ export function NoiCalculator() {
   const [kwh, setKwh] = useState(850);          // monthly kWh / unit
   const [tenantRate, setTenantRate] = useState(0.22); // $/kWh tenants pay
   const [solarCost, setSolarCost] = useState(0.11);   // $/kWh NOI cost
-
+  const tenantRateId = useId();
+  const solarCostId = useId();
   const { perUnitMo, perUnitYr, propertyMo, propertyYr, fee, netYr, gridSavings } = useMemo(() => {
     const margin = Math.max(0, tenantRate - solarCost);
     const perUnitMo = kwh * margin;
@@ -100,10 +103,11 @@ export function NoiCalculator() {
               <Slider label="Monthly kWh / unit" value={kwh} min={300} max={1500} step={10} suffix=" kWh" onChange={setKwh} />
               <div>
                 <div className="flex items-baseline justify-between">
-                  <label className="text-sm font-medium">Tenant price</label>
+                  <label htmlFor={tenantRateId} className="text-sm font-medium">Tenant price</label>
                   <span className="font-mono pb-num text-sm text-[color:var(--ink-soft)]">${tenantRate.toFixed(2)} / kWh</span>
                 </div>
                 <input
+                  id={tenantRateId}
                   type="range" min={0.10} max={0.35} step={0.005}
                   value={tenantRate}
                   onChange={(e) => setTenantRate(Number(e.target.value))}
@@ -115,10 +119,11 @@ export function NoiCalculator() {
               </div>
               <div>
                 <div className="flex items-baseline justify-between">
-                  <label className="text-sm font-medium">Solar cost (you)</label>
+                  <label htmlFor={solarCostId} className="text-sm font-medium">Solar cost (you)</label>
                   <span className="font-mono pb-num text-sm text-[color:var(--ink-soft)]">${solarCost.toFixed(2)} / kWh</span>
                 </div>
                 <input
+                  id={solarCostId}
                   type="range" min={0.05} max={0.20} step={0.005}
                   value={solarCost}
                   onChange={(e) => setSolarCost(Number(e.target.value))}
