@@ -14,10 +14,15 @@ export const Route = createFileRoute("/kipling-meadows")({
 
 function KiplingMeadowsPage() {
   return (
-    <iframe
-      src="/kipling-meadows.html"
-      title="NOI × Center Creek Capital — Kipling Meadows Solar Offer"
-      className="h-screen w-full border-0"
-    />
+    <>
+      <h1 className="sr-only">
+        NOI × Center Creek Capital — Kipling Meadows Solar Program
+      </h1>
+      <iframe
+        src="/kipling-meadows.html"
+        title="NOI × Center Creek Capital — Kipling Meadows Solar Offer"
+        className="h-screen w-full border-0"
+      />
+    </>
   );
 }
