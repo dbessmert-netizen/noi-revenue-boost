@@ -11,8 +11,6 @@ const nav = [
   { to: "/faq", label: "FAQ" },
 ] as const;
 
-
-
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-[color:var(--paper)]/85 backdrop-blur">
@@ -33,11 +31,6 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <Link
-            to="/contact"
-            className="inline-flex items-center rounded-full bg-foreground px-4 py-2 text-sm font-medium text-[color:var(--paper)] transition hover:opacity-90"
-          >
-        <div className="flex items-center gap-3">
           <a
             href="https://landlord.joinnoi.com/"
             target="_blank"
@@ -53,3 +46,7 @@ export function Header() {
             Contact us
           </Link>
         </div>
+      </div>
+    </header>
+  );
+}
