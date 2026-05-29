@@ -32,7 +32,7 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-3">
           <a
-            href="https://landlord.joinnoi.com/"
+            href="https://landlord.joinnoi.com/sign-up"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center rounded-full bg-[color:var(--solar)] px-4 py-2 text-sm font-medium text-[color:var(--paper)] transition hover:opacity-90"
