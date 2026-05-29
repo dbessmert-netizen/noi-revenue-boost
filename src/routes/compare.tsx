@@ -8,7 +8,7 @@ export const Route = createFileRoute("/compare")({
       path: "/compare",
       title: "NOI vs. PPAs vs. Solar Installers vs. Billing Software",
       description:
-        "How NOI compares to third-party PPAs, solar installers, and rent-roll billing tools. The full-stack solar revenue platform built for US landlords, developers, and HOAs.",
+        "How NOI compares to third-party PPAs, solar installers & rent-roll billing tools — the full-stack solar revenue platform for US landlords.",
       keywords: [
         "PPA vs ownership solar landlord",
         "solar installer vs platform",

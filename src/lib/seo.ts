@@ -1,7 +1,7 @@
 // Centralized SEO helper for all NOI marketing pages.
 // Audience: USA landlords, property developers, HOAs, BTR operators, REITs.
 
-const SITE = "https://www.joinnoi.com";
+const SITE = "https://joinnoi.com";
 const OG_IMAGE = `${SITE}/og.png`;
 
 const BASE_KEYWORDS = [

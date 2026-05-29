@@ -8,7 +8,7 @@ export const Route = createFileRoute("/pricing")({
       path: "/pricing",
       title: "Pricing — Performance-Aligned Solar Revenue Platform | NOI",
       description:
-        "Transparent pricing for US landlords, property developers, REITs, and HOAs. No setup fees. No lock-in. Platform fee scales inversely with portfolio size — Starter, Growth, and Portfolio tiers.",
+        "Transparent pricing for US landlords, developers, REITs & HOAs. No setup fees, no lock-in. Starter, Growth & Portfolio tiers.",
       keywords: [
         "solar revenue platform pricing",
         "tenant billing pricing landlord",

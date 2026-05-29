@@ -2,16 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { NoiCalculator } from "@/components/site/NoiCalculator";
 import { ProductWalkthrough } from "@/components/site/ProductWalkthrough";
-import { seo, productJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { seo, productJsonLd, breadcrumbJsonLd, orgJsonLd, websiteJsonLd } from "@/lib/seo";
 import heroRooftop from "@/assets/hero-rooftop.jpg";
 
 export const Route = createFileRoute("/")({
   head: () =>
     seo({
       path: "/",
-      title: "NOI — Rooftop Solar Revenue for US Landlords, Developers & HOAs",
+      title: "NOI — Rooftop Solar Revenue for US Rental Properties",
       description:
-        "Turn your rental rooftop into recurring revenue. NOI finances solar, meters tenants, and bills on your behalf — built for US landlords, property developers, BTR operators, and HOAs. Zero capex.",
+        "Turn your rental rooftop into recurring revenue. NOI finances solar, meters tenants & bills on your behalf — zero capex for landlords, developers & HOAs.",
       keywords: [
         "increase NOI rental property",
         "passive income for landlords",
@@ -20,7 +20,12 @@ export const Route = createFileRoute("/")({
         "HOA solar income",
         "property developer ROI solar",
       ],
-      jsonLd: [productJsonLd, breadcrumbJsonLd([{ name: "Home", path: "/" }])],
+      jsonLd: [
+        orgJsonLd,
+        websiteJsonLd,
+        productJsonLd,
+        breadcrumbJsonLd([{ name: "Home", path: "/" }]),
+      ],
     }),
   component: HomePage,
 });
