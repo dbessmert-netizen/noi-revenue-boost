@@ -1,0 +1,27 @@
+# NOI
+
+> NOI turns rental rooftops into recurring revenue. We finance and install solar, meter tenant consumption, and bill on your behalf — built for US landlords, property developers, BTR operators, and HOAs. Zero capex.
+
+## Pages
+
+- [Home](/): What NOI is and the live revenue calculator.
+- [Economics](/economics): How much NOI a rooftop adds — modeled per unit, per building, per portfolio.
+- [Process](/process): The 4-step path from utility bill to first monthly payout (~60 days).
+- [Compare](/compare): NOI vs. PPAs, solar installers, and billing software.
+- [Pricing](/pricing): Starter, Growth, and Portfolio tiers. Performance-aligned.
+- [Partners](/partners): For solar installers, loan brokers, builders & developers.
+- [FAQ](/faq): Legality, financing, tenant payments, regulation, timelines.
+- [Team](/team): The people behind NOI.
+- [Contact](/contact): Request a tailored revenue estimate.
+- [Blog](/blog): 20+ technical posts on rooftop solar for rental property NOI.
+
+## Blog highlights
+
+- [Rooftop Solar + Rental Property NOI](/blog/rooftop-solar-rental-property-noi)
+- [PPA vs. Owned Solar for Landlords](/blog/ppa-vs-owned-solar-landlord)
+- [Solar NOI Calculator for Multifamily](/blog/solar-noi-calculator-multifamily)
+- [Best States for Solar Rentals 2026](/blog/best-states-solar-rental-property-2026)
+- [VNEM (Virtual Net Metering) Explained](/blog/vnem-virtual-net-metering-explained)
+- [Rooftop Solar ITC Tax Credit 2026](/blog/rooftop-solar-itc-tax-credit-2026)
+- [Solar Cap Rate & Property Value](/blog/solar-cap-rate-property-value)
+- [Tenant Billing with Stripe Connect](/blog/tenant-billing-solar-stripe-connect)
