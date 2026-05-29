@@ -37,10 +37,19 @@ export function Header() {
             to="/contact"
             className="inline-flex items-center rounded-full bg-foreground px-4 py-2 text-sm font-medium text-[color:var(--paper)] transition hover:opacity-90"
           >
+        <div className="flex items-center gap-3">
+          <a
+            href="https://landlord.joinnoi.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center rounded-full bg-[color:var(--solar)] px-4 py-2 text-sm font-medium text-[color:var(--paper)] transition hover:opacity-90"
+          >
+            Sign up
+          </a>
+          <Link
+            to="/contact"
+            className="inline-flex items-center rounded-full bg-foreground px-4 py-2 text-sm font-medium text-[color:var(--paper)] transition hover:opacity-90"
+          >
             Contact us
           </Link>
         </div>
-      </div>
-    </header>
-  );
-}
