@@ -7,7 +7,7 @@
 - [Home](/): What NOI is and the live revenue calculator.
 - [Economics](/economics): How much NOI a rooftop adds — modeled per unit, per building, per portfolio.
 - [Process](/process): The 4-step path from utility bill to first monthly payout (~60 days).
-- [Compare](/compare): NOI vs. PPAs, solar installers, and billing software.
+
 - [Pricing](/pricing): Starter, Growth, and Portfolio tiers. Performance-aligned.
 - [Partners](/partners): For solar installers, loan brokers, builders & developers.
 - [FAQ](/faq): Legality, financing, tenant payments, regulation, timelines.
