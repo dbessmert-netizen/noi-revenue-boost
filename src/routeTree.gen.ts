@@ -17,6 +17,7 @@ import { Route as KiplingMeadowsRouteImport } from './routes/kipling-meadows'
 import { Route as KiplingRouteImport } from './routes/kipling'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EconomicsRouteImport } from './routes/economics'
+import { Route as DuvalRouteImport } from './routes/duval'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
@@ -63,6 +64,11 @@ const EconomicsRoute = EconomicsRouteImport.update({
   path: '/economics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DuvalRoute = DuvalRouteImport.update({
+  id: '/duval',
+  path: '/duval',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/duval': typeof DuvalRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling': typeof KiplingRoute
@@ -108,6 +115,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/duval': typeof DuvalRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling': typeof KiplingRoute
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/duval': typeof DuvalRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
   '/kipling': typeof KiplingRoute
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/contact'
+    | '/duval'
     | '/economics'
     | '/faq'
     | '/kipling'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/contact'
+    | '/duval'
     | '/economics'
     | '/faq'
     | '/kipling'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/contact'
+    | '/duval'
     | '/economics'
     | '/faq'
     | '/kipling'
@@ -187,6 +199,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
+  DuvalRoute: typeof DuvalRoute
   EconomicsRoute: typeof EconomicsRoute
   FaqRoute: typeof FaqRoute
   KiplingRoute: typeof KiplingRoute
@@ -257,6 +270,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EconomicsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/duval': {
+      id: '/duval'
+      path: '/duval'
+      fullPath: '/duval'
+      preLoaderRoute: typeof DuvalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -299,6 +319,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
+  DuvalRoute: DuvalRoute,
   EconomicsRoute: EconomicsRoute,
   FaqRoute: FaqRoute,
   KiplingRoute: KiplingRoute,
