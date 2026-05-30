@@ -22,7 +22,7 @@ export function Footer() {
             <div className="eyebrow">Product</div>
             <ul className="mt-4 space-y-2 text-sm">
               <li><Link to="/economics" className="hover:text-foreground text-[color:var(--ink-soft)]">Economics</Link></li>
-              <li><Link to="/compare" className="hover:text-foreground text-[color:var(--ink-soft)]">Compare</Link></li>
+              
               <li><Link to="/process" className="hover:text-foreground text-[color:var(--ink-soft)]">Process</Link></li>
               <li><Link to="/pricing" className="hover:text-foreground text-[color:var(--ink-soft)]">Pricing</Link></li>
             </ul>
