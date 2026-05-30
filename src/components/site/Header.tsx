@@ -5,7 +5,7 @@ const nav = [
   { to: "/economics", label: "Economics" },
   { to: "/compare", label: "Compare" },
   { to: "/process", label: "Process" },
-  { to: "/pricing", label: "Pricing" },
+  
   { to: "/team", label: "Team" },
   { to: "/blog", label: "Blog" },
   { to: "/faq", label: "FAQ" },
