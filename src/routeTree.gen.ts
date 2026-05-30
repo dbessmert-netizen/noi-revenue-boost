@@ -18,7 +18,6 @@ import { Route as KiplingRouteImport } from './routes/kipling'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EconomicsRouteImport } from './routes/economics'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CompareRouteImport } from './routes/compare'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeamSlugRouteImport } from './routes/team_.$slug'
@@ -69,11 +68,6 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CompareRoute = CompareRouteImport.update({
-  id: '/compare',
-  path: '/compare',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -98,7 +92,6 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
-  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
@@ -114,7 +107,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
-  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
@@ -131,7 +123,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
-  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/economics': typeof EconomicsRoute
   '/faq': typeof FaqRoute
@@ -149,7 +140,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/blog'
-    | '/compare'
     | '/contact'
     | '/economics'
     | '/faq'
@@ -165,7 +155,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/blog'
-    | '/compare'
     | '/contact'
     | '/economics'
     | '/faq'
@@ -181,7 +170,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/blog'
-    | '/compare'
     | '/contact'
     | '/economics'
     | '/faq'
@@ -198,7 +186,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRoute
-  CompareRoute: typeof CompareRoute
   ContactRoute: typeof ContactRoute
   EconomicsRoute: typeof EconomicsRoute
   FaqRoute: typeof FaqRoute
@@ -277,13 +264,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/compare': {
-      id: '/compare'
-      path: '/compare'
-      fullPath: '/compare'
-      preLoaderRoute: typeof CompareRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/blog': {
       id: '/blog'
       path: '/blog'
@@ -318,7 +298,6 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRoute,
-  CompareRoute: CompareRoute,
   ContactRoute: ContactRoute,
   EconomicsRoute: EconomicsRoute,
   FaqRoute: FaqRoute,
