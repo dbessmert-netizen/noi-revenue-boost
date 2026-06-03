@@ -16,6 +16,8 @@ const NOTIFY_TO = "dbessmert@gmail.com";
 export const submitContact = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => contactSchema.parse(data))
   .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { sendLovableEmail } = await import("@lovable.dev/email-js");
     const insert = {
       name: data.name,
       email: data.email,
