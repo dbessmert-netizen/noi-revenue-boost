@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useId, useState } from "react";
 import { SiteLayout } from "@/components/site/Layout";
-import { submitContact } from "@/server/contact.functions";
+import { submitContact } from "@/lib/contact.functions";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
