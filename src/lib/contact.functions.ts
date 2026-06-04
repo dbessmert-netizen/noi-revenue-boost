@@ -17,7 +17,7 @@ export const submitContact = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => contactSchema.parse(data))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { sendLovableEmail } = await import("@lovable.dev/email-js");
+    const { Resend } = await import("resend");
     const insert = {
       name: data.name,
       email: data.email,
@@ -36,8 +36,9 @@ export const submitContact = createServerFn({ method: "POST" })
 
     // Fire-and-log email notification — never block the user response on email failure
     try {
-      const apiKey = process.env.LOVABLE_API_KEY;
+      const apiKey = process.env.RESEND_API_KEY;
       if (apiKey) {
+        const resend = new Resend(apiKey);
         const rows = [
           ["Name", data.name],
           ["Email", data.email],
@@ -65,20 +66,16 @@ export const submitContact = createServerFn({ method: "POST" })
             </table>
           </div>`;
         const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
-        await sendLovableEmail(
-          {
-            to: NOTIFY_TO,
-            from: "NOI Leads <leads@joinnoi.com>",
-            subject: `New NOI lead: ${data.name}${data.company ? " — " + data.company : ""}`,
-            html,
-            text,
-            reply_to: data.email,
-            purpose: "transactional",
-          },
-          { apiKey },
-        );
+        await resend.emails.send({
+          to: NOTIFY_TO,
+          from: "NOI Leads <leads@joinnoi.com>",
+          subject: `New NOI lead: ${data.name}${data.company ? " — " + data.company : ""}`,
+          html,
+          text,
+          replyTo: data.email,
+        });
       } else {
-        console.warn("LOVABLE_API_KEY missing; skipping notification email");
+        console.warn("RESEND_API_KEY missing; skipping notification email");
       }
     } catch (e) {
       console.error("Notification email failed (lead saved):", e);
