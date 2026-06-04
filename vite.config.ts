@@ -3,17 +3,10 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
-import { cloudflare } from "@cloudflare/vite-plugin";
 
-export default defineConfig(({ command }) => ({
-  plugins: [
-    tanstackStart(),
-    react(),
-    tailwindcss(),
-    tsConfigPaths(),
-    ...(command === "build" ? [cloudflare()] : []),
-  ],
+export default defineConfig({
+  plugins: [tanstackStart(), react(), tailwindcss(), tsConfigPaths()],
   resolve: {
     dedupe: ["react", "react-dom", "@tanstack/react-router"],
   },
-}));
+});
