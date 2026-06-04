@@ -50,6 +50,39 @@ export type Database = {
         }
         Relationships: []
       }
+      page_subscribers: {
+        Row: {
+          blocked: boolean
+          created_at: string
+          email: string
+          id: string
+          ip: string | null
+          last_seen_at: string
+          page: string
+          user_agent: string | null
+        }
+        Insert: {
+          blocked?: boolean
+          created_at?: string
+          email: string
+          id?: string
+          ip?: string | null
+          last_seen_at?: string
+          page: string
+          user_agent?: string | null
+        }
+        Update: {
+          blocked?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          ip?: string | null
+          last_seen_at?: string
+          page?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
