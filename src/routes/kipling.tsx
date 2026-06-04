@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "@/lib/seo";
-import { EmailGate } from "@/components/site/EmailGate";
 
 export const Route = createFileRoute("/kipling")({
   head: () =>
@@ -15,7 +14,7 @@ export const Route = createFileRoute("/kipling")({
 
 function KiplingPage() {
   return (
-    <EmailGate page="kipling" title="NOI × Center Creek — Kipling Solar Offer">
+    <>
       <h1 className="sr-only">
         NOI × Center Creek Capital — Kipling Solar Program
       </h1>
@@ -24,6 +23,6 @@ function KiplingPage() {
         title="NOI × Center Creek Capital — Kipling Solar Offer"
         className="h-screen w-full border-0"
       />
-    </EmailGate>
+    </>
   );
 }
