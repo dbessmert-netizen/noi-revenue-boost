@@ -6,6 +6,11 @@
       "source": "/duval",
       "destination": "/duval.html",
       "permanent": false
+    },
+    {
+      "source": "/kipling",
+      "destination": "/kipling.html",
+      "permanent": false
     }
   ]
 }
