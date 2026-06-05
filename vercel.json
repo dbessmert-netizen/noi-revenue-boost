@@ -1,4 +1,11 @@
 {
   "buildCommand": "vite build",
-  "framework": null
+  "framework": null,
+  "redirects": [
+    {
+      "source": "/duval",
+      "destination": "/duval.html",
+      "permanent": false
+    }
+  ]
 }
