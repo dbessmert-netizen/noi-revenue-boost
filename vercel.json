@@ -11,6 +11,11 @@
       "source": "/kipling",
       "destination": "/kipling.html",
       "permanent": false
+    },
+    {
+      "source": "/duval_kipling",
+      "destination": "/duval_kipling.html",
+      "permanent": false
     }
   ]
 }
