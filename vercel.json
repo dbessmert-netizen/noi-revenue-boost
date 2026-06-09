@@ -21,6 +21,11 @@
       "source": "/portfolio",
       "destination": "/duval_kipling.html",
       "permanent": false
+    },
+    {
+      "source": "/arc",
+      "destination": "/arc_portfolio.html",
+      "permanent": false
     }
   ]
 }
