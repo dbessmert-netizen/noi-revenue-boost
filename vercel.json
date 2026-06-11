@@ -29,12 +29,12 @@
     },
     {
       "source": "/CC_portfolio",
-      "destination": "/noi_portfolio.html",
+      "destination": "/cc_portfolio.html",
       "permanent": false
     },
     {
       "source": "/CC",
-      "destination": "/noi_portfolio.html",
+      "destination": "/cc_portfolio.html",
       "permanent": false
     }
   ]
