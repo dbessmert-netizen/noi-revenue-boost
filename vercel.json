@@ -26,6 +26,11 @@
       "source": "/arc",
       "destination": "/arc_portfolio.html",
       "permanent": false
+    },
+    {
+      "source": "/CC_portfolio",
+      "destination": "/noi_portfolio.html",
+      "permanent": false
     }
   ]
 }
